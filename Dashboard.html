@@ -6,6 +6,7 @@
     <title>Student Engagement Dashboard - University of Arizona Think Tank</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <style>
+        /* === EXISTING STYLES (keeping most of them) === */
         * {
             margin: 0;
             padding: 0;
@@ -238,7 +239,8 @@
             padding: 16px 18px;
             overflow-x: auto;
             overflow-y: visible;
-            height: 120px;
+            height: 140px;
+            position: relative;
         }
 
         .timeline-controls {
@@ -333,19 +335,6 @@
             z-index: 0;
         }
 
-        .timeline-today-marker {
-            position: absolute;
-            top: -20px;
-            transform: translateX(-50%);
-            background: #e74c3c;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.8em;
-            white-space: nowrap;
-            z-index: 4;
-        }
-
         .timeline-current-line {
             position: absolute;
             top: 0;
@@ -353,18 +342,6 @@
             width: 2px;
             background: #e74c3c;
             z-index: 3;
-        }
-
-        #milestoneTimelineWrapper {
-            background: #fff;
-            border-radius: 15px;
-            margin-bottom: 28px;
-            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
-            padding: 16px 18px;
-            overflow-x: auto;
-            overflow-y: visible;
-            height: 140px;
-            position: relative;
         }
 
         #milestoneTimelineWrapper::-webkit-scrollbar {
@@ -519,26 +496,274 @@
                 align-items: stretch;
             }
         }
+
+        @media print {
+            body { background: white; }
+            .no-print { display: none !important; }
+            .page-break { page-break-after: always; }
+        }
+
+        /* === NEW FEATURE STYLES === */
+        
+        /* Alerts Panel */
+        .alerts-panel {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .alert-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+        }
+
+        .alert-item.critical {
+            background: #f8d7da;
+            border-left-color: #dc3545;
+        }
+
+        .alert-icon {
+            font-size: 1.5em;
+            margin-right: 15px;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-dismiss {
+            background: none;
+            border: none;
+            font-size: 1.2em;
+            cursor: pointer;
+            color: #999;
+        }
+
+        /* Predictive Analytics */
+        .prediction-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-left: 8px;
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .prediction-badge.warning {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        /* Bulk Actions Bar */
+        .bulk-actions-bar {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2c3e50;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            z-index: 999;
+        }
+
+        .bulk-actions-bar.show {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Student Selection */
+        .student-item.selectable {
+            position: relative;
+            padding-left: 50px;
+        }
+
+        .student-checkbox {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        /* Export/Import Panel */
+        .data-management {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        /* Communication Log */
+        .comm-log {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .comm-entry {
+            display: flex;
+            align-items: start;
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comm-icon {
+            width: 40px;
+            height: 40px;
+            background: #e3f2fd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .comm-details {
+            flex: 1;
+        }
+
+        .comm-timestamp {
+            font-size: 0.85em;
+            color: #999;
+        }
+
+        /* Goal Setting */
+        .goal-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+
+        .goal-progress {
+            width: 100px;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            margin: 0 10px;
+            overflow: hidden;
+        }
+
+        .goal-progress-bar {
+            height: 100%;
+            background: #28a745;
+            transition: width 0.3s ease;
+        }
+
+        /* Dashboard Customization */
+        .customize-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+
+        .widget-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .widget-toggle input {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Student Comparison */
+        .comparison-panel {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .comparison-metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comparison-bar {
+            flex: 1;
+            height: 20px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            margin: 0 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .comparison-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: #3498db;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .comparison-fill.student {
+            background: #e74c3c;
+            opacity: 0.8;
+        }
     </style>
 </head>
 <body>
+    <!-- Dashboard Customization Button -->
+    <button class="customize-button no-print" onclick="DashboardCustomizer.toggle()">
+        ⚙️ Customize Dashboard
+    </button>
+
     <div class="dashboard-header">
         <h1>🎯 Student Engagement Dashboard</h1>
         <p>University of Arizona Think Tank • Proactive Student Support System</p>
     </div>
 
-    <!-- Timeline Section -->
-    <div id="milestoneTimelineWrapper">
-        <div class="timeline-controls">
-            <button class="filter-button filter-active" onclick="window.Timeline.filter('all', this)">All Events</button>
-            <button class="filter-button filter-inactive" onclick="window.Timeline.filter('registration', this)">Registration</button>
-            <button class="filter-button filter-inactive" onclick="window.Timeline.filter('exam', this)">Exam</button>
-            <button class="filter-button filter-inactive" onclick="window.Timeline.filter('holiday', this)">Holiday</button>
-            <button class="filter-button filter-inactive" onclick="window.Timeline.filter('outreach', this)">Outreach</button>
-            <button class="filter-button filter-inactive" onclick="window.Timeline.filter('custom', this)">Custom</button>
-            <button class="filter-button filter-active" style="margin-left:auto;" onclick="window.Timeline.addCustomEvent()">+ Add Event</button>
-        </div>
-        <div id="milestoneTimeline" class="milestone-timeline"></div>
+    <!-- NEW: Alerts Panel -->
+    <div class="alerts-panel" id="alertsPanel" style="display: none;">
+        <h3 style="margin-bottom: 15px;">📢 System Alerts</h3>
+        <div id="alertsContainer"></div>
+    </div>
+
+    <!-- NEW: Data Management Panel -->
+    <div class="data-management no-print">
+        <span style="font-weight: bold;">Data Management:</span>
+        <button class="filter-button filter-inactive" onclick="DataExport.exportToCSV()">📊 Export to CSV</button>
+        <button class="filter-button filter-inactive" onclick="DataExport.exportToJSON()">📄 Export to JSON</button>
+        <button class="filter-button filter-inactive" onclick="DataImport.showImportDialog()">📥 Import Data</button>
+        <button class="filter-button filter-inactive" onclick="Reports.generateReport()">📑 Generate Report</button>
+        <button class="filter-button filter-inactive" onclick="BulkActions.toggleSelectionMode()">☑️ Bulk Select</button>
     </div>
 
     <!-- Stats Grid -->
@@ -559,6 +784,12 @@
             <div class="stat-number" style="color: #3498db;" id="totalCount">0</div>
             <div class="stat-label">Total Students</div>
         </div>
+    </div>
+
+    <!-- NEW: Student Comparison Panel -->
+    <div class="comparison-panel" id="comparisonPanel" style="display: none;">
+        <h3 style="margin-bottom: 20px;">📊 Student vs Class Average Comparison</h3>
+        <div id="comparisonContent"></div>
     </div>
 
     <!-- Charts Grid -->
@@ -583,72 +814,11 @@
             <div class="chart-title">Think Tank Utilization</div>
             <canvas id="thinkTankChart"></canvas>
         </div>
-    </div>
-
-    <!-- Filters -->
-    <div class="filters">
-        <span class="filter-label">Show Students:</span>
-        <button class="filter-button filter-active" onclick="StudentManager.filter('all', this)">All Students</button>
-        <button class="filter-button filter-inactive" onclick="StudentManager.filter('red', this)">🔴 Immediate Action</button>
-        <button class="filter-button filter-inactive" onclick="StudentManager.filter('yellow', this)">🟡 Need Attention</button>
-        <button class="filter-button filter-inactive" onclick="StudentManager.filter('green', this)">🟢 Doing Well</button>
-        <button class="filter-button filter-inactive" onclick="AdvancedFilters.toggle()">🔍 Advanced Filters</button>
-        <div style="margin-left: auto; display: flex; gap: 10px; align-items: center;">
-            <span class="filter-label">Sort:</span>
-            <button class="filter-button filter-active" id="sortWellnessBtn" onclick="StudentManager.setSortOrder('wellness')">📊 Wellness</button>
-            <button class="filter-button filter-inactive" id="sortAlphaBtn" onclick="StudentManager.setSortOrder('alphabetical')">🔤 A-Z</button>
-            <span class="filter-label">View:</span>
-            <button class="filter-button filter-active" id="listViewBtn" onclick="StudentManager.toggleView('list')">📋 List</button>
-            <button class="filter-button filter-inactive" id="gridViewBtn" onclick="StudentManager.toggleView('grid')">⊞ Grid</button>
+        <!-- NEW: Predictive Analytics Chart -->
+        <div class="chart-container" id="predictiveChart" style="display: none;">
+            <div class="chart-title">Risk Prediction - Next 2 Weeks</div>
+            <canvas id="riskPredictionChart"></canvas>
         </div>
-    </div>
-
-    <!-- Advanced Filters -->
-    <div class="advanced-filters" id="advancedFilters">
-        <div class="filter-row">
-            <span class="filter-label">Search by Name:</span>
-            <input type="text" class="filter-input" id="nameFilter" placeholder="Enter student name..." onkeyup="AdvancedFilters.applyFilters()">
-            
-            <span class="filter-label">Grade Range:</span>
-            <input type="number" class="filter-input" id="minGrade" placeholder="Min %" style="width:80px;" onchange="AdvancedFilters.applyFilters()">
-            <input type="number" class="filter-input" id="maxGrade" placeholder="Max %" style="width:80px;" onchange="AdvancedFilters.applyFilters()">
-        </div>
-        
-        <div class="filter-row">
-            <span class="filter-label">ALEKS Days:</span>
-            <select class="filter-input" id="aleksDaysFilter" onchange="AdvancedFilters.applyFilters()">
-                <option value="">Any</option>
-                <option value="0-3">0-3 days</option>
-                <option value="4-7">4-7 days</option>
-                <option value="8+">8+ days</option>
-            </select>
-            
-            <span class="filter-label">Think Tank Visits:</span>
-            <select class="filter-input" id="visitsFilter" onchange="AdvancedFilters.applyFilters()">
-                <option value="">Any</option>
-                <option value="0">0 visits</option>
-                <option value="1-2">1-2 visits</option>
-                <option value="3+">3+ visits</option>
-            </select>
-            
-            <span class="filter-label">Stress Level:</span>
-            <select class="filter-input" id="stressFilter" onchange="AdvancedFilters.applyFilters()">
-                <option value="">Any</option>
-                <option value="low">Low (1-4)</option>
-                <option value="medium">Medium (5-7)</option>
-                <option value="high">High (8-10)</option>
-            </select>
-        </div>
-        
-        <div class="filter-row">
-            <button class="filter-button filter-inactive" onclick="AdvancedFilters.clearAll()">Clear All Filters</button>
-            <span id="filterResultCount" style="margin-left: auto; color: #7f8c8d;"></span>
-        </div>
-    </div>
-
-    <!-- Add Student Button -->
-    <div style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
-        <button class="filter-button filter-active" onclick="StudentForm.open()">+ Add Student</button>
     </div>
 
     <!-- Student List -->
@@ -657,7 +827,17 @@
         <div id="studentContainer"></div>
     </div>
 
-    <!-- Student Profile Modal -->
+    <!-- NEW: Bulk Actions Bar -->
+    <div class="bulk-actions-bar" id="bulkActionsBar">
+        <span id="selectedCount">0 students selected</span>
+        <button class="filter-button filter-active" onclick="BulkActions.sendEmail()">📧 Send Email</button>
+        <button class="filter-button filter-active" onclick="BulkActions.scheduleCheckin()">📅 Schedule Check-in</button>
+        <button class="filter-button filter-active" onclick="BulkActions.assignGoals()">🎯 Assign Goals</button>
+        <button class="filter-button filter-active" onclick="BulkActions.exportSelected()">📊 Export Selected</button>
+        <button class="filter-button filter-inactive" onclick="BulkActions.clearSelection()">❌ Clear</button>
+    </div>
+
+    <!-- Existing Modals -->
     <div id="studentProfileModal" class="modal">
         <div class="modal-content">
             <button class="modal-close" onclick="StudentProfile.close()">×</button>
@@ -728,7 +908,9 @@
     </div>
 
     <script>
-        // ===== DATA CONSTANTS =====
+        // === ENHANCED DASHBOARD CODE ===
+
+        // === CORE DATA MANAGER ===
         const CONFIG = {
             SEMESTER_START: new Date('2025-06-02'),
             SEMESTER_END: new Date('2025-08-08'),
@@ -784,7 +966,6 @@
             }
         };
 
-        // ===== CORE DATA MANAGER =====
         const DataManager = {
             students: [],
             charts: {},
@@ -828,7 +1009,6 @@
             },
 
             calculateComprehensiveSentiment(student) {
-                // Multi-factor sentiment analysis
                 let sentiment = 5; // Base neutral score
                 
                 // Academic performance impact (30% weight)
@@ -1011,7 +1191,7 @@
             }
         };
 
-        // ===== STATISTICS MANAGER =====
+        // === STATISTICS MANAGER ===
         const StatsManager = {
             update() {
                 const green = DataManager.students.filter(s => s.status === 'green').length;
@@ -1025,7 +1205,7 @@
             }
         };
 
-        // ===== CHART MANAGER =====
+        // === CHART MANAGER ===
         const ChartManager = {
             cleanup() {
                 Object.values(DataManager.charts).forEach(chart => {
@@ -1193,7 +1373,7 @@
             }
         };
 
-        // ===== STUDENT MANAGER =====
+        // === STUDENT MANAGER ===
         const StudentManager = {
             currentFilter: 'all',
             currentView: 'list',
@@ -1359,7 +1539,7 @@
             }
         };
 
-        // ===== STUDENT PROFILE MANAGER =====
+        // === STUDENT PROFILE MANAGER ===
         const StudentProfile = {
             show(studentId) {
                 const student = DataManager.getStudentById(studentId);
@@ -1611,7 +1791,7 @@
             }
         };
 
-        // ===== STUDENT FORM MANAGER =====
+        // === STUDENT FORM MANAGER ===
         const StudentForm = {
             open(studentId = null) {
                 const form = document.getElementById('studentForm');
@@ -1673,7 +1853,7 @@
             }
         };
 
-        // ===== TIMELINE MANAGER =====
+        // === TIMELINE MANAGER ===
         const Timeline = {
             events: [
                 { date: "2025-06-02", label: "Summer Session Starts", type: "registration" },
@@ -1848,172 +2028,109 @@
                             width: ${Math.min(100, monthEnd) - Math.max(0, monthStart)}%;
                             background-color: ${month.color};
                         `;
-                        
-                        // Add month label
+                        container.appendChild(shade);
+
                         const label = document.createElement('div');
                         label.style.cssText = `
                             position: absolute;
                             top: 5px;
-                            left: 50%;
+                            left: ${Math.max(0, monthStart + ((Math.min(100, monthEnd) - Math.max(0, monthStart)) / 2))}%;
                             transform: translateX(-50%);
-                            font-size: 0.8em;
-                            color: #666;
-                            font-weight: bold;
-                            pointer-events: none;
+                            font-size: 0.9em;
+                            color: #555;
+                            z-index: 2;
                         `;
                         label.textContent = month.name;
-                        shade.appendChild(label);
-                        
-                        container.appendChild(shade);
+                        container.appendChild(label);
                     }
                 });
-            },
-
-            getTimelinePercent(date) {
-                const timelineLength = (CONFIG.SEMESTER_END - CONFIG.SEMESTER_START) / (1000 * 60 * 60 * 24);
-                const curr = (new Date(date) - CONFIG.SEMESTER_START) / (1000 * 60 * 60 * 24);
-                return Math.max(0, Math.min(1, curr / timelineLength));
             },
 
             getEventEmoji(type) {
-                const emojis = {
-                    exam: "📝",
-                    holiday: "🏖️",
-                    outreach: "⭐",
-                    registration: "🎓",
-                    custom: "🔹"
-                };
-                return emojis[type] || "📅";
-            },
-
-            addCustomEvent() {
-                const label = prompt('Event name?');
-                if (!label) return;
-                
-                const date = prompt('Date (YYYY-MM-DD)?');
-                if (!date) return;
-                
-                // Validate date format
-                const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
-                if (!dateRegex.test(date)) {
-                    alert('Please enter date in YYYY-MM-DD format');
-                    return;
+                switch(type) {
+                    case 'registration': return '📅';
+                    case 'exam': return '📝';
+                    case 'holiday': return '🎉';
+                    case 'outreach': return '📞';
+                    case 'custom': return '⭐';
+                    default: return '•';
                 }
-                
-                const type = prompt('Event type (registration/exam/holiday/outreach/custom)?') || 'custom';
-                
-                this.events.push({ date, label, type });
-                this.events.sort((a, b) => new Date(a.date) - new Date(b.date)); // Keep chronological order
-                this.render();
-                
-                alert(`Event "${label}" added successfully!`);
             },
 
-            updateFilterButtons(activeButton) {
-                document.querySelectorAll('.timeline-controls .filter-button').forEach(btn => {
-                    if (btn !== activeButton && !btn.textContent.includes('Add Event')) {
-                        btn.classList.remove('filter-active');
-                        btn.classList.add('filter-inactive');
-                    }
-                });
-                activeButton.classList.remove('filter-inactive');
-                activeButton.classList.add('filter-active');
+            getTimelinePercent(date) {
+                const total = CONFIG.SEMESTER_END - CONFIG.SEMESTER_START;
+                const offset = date - CONFIG.SEMESTER_START;
+                return offset / total;
             },
 
             setupScrolling() {
                 const wrapper = document.getElementById('milestoneTimelineWrapper');
-                let isDown = false, startX, scrollLeft;
+                wrapper.scrollLeft = (wrapper.scrollWidth - wrapper.clientWidth) / 2;
+            },
 
-                // Mouse drag scrolling
-                wrapper.addEventListener('mousedown', e => {
-                    isDown = true;
-                    wrapper.style.cursor = 'grabbing';
-                    startX = e.pageX - wrapper.offsetLeft;
-                    scrollLeft = wrapper.scrollLeft;
-                    e.preventDefault();
+            updateFilterButtons(activeButton) {
+                const buttons = document.querySelectorAll('.timeline-controls .filter-button');
+                buttons.forEach(btn => {
+                    btn.classList.remove('filter-active');
+                    btn.classList.add('filter-inactive');
                 });
-
-                document.addEventListener('mouseup', () => {
-                    isDown = false;
-                    wrapper.style.cursor = 'grab';
-                });
-
-                wrapper.addEventListener('mouseleave', () => {
-                    isDown = false;
-                    wrapper.style.cursor = 'grab';
-                });
-
-                wrapper.addEventListener('mousemove', e => {
-                    if (!isDown) return;
-                    e.preventDefault();
-                    const x = e.pageX - wrapper.offsetLeft;
-                    const walk = (x - startX) * 2; // Increased sensitivity
-                    wrapper.scrollLeft = scrollLeft - walk;
-                });
-
-                // Wheel scrolling (both horizontal and shift+wheel)
-                wrapper.addEventListener('wheel', e => {
-                    if (e.shiftKey) {
-                        // Shift + wheel for horizontal scroll
-                        wrapper.scrollLeft += e.deltaY;
-                        e.preventDefault();
-                    } else {
-                        // Regular wheel for horizontal scroll in timeline
-                        wrapper.scrollLeft += e.deltaY;
-                        e.preventDefault();
-                    }
-                }, { passive: false });
-
-                // Touch support for mobile
-                let touchStartX;
-                wrapper.addEventListener('touchstart', e => {
-                    touchStartX = e.touches[0].pageX - wrapper.offsetLeft;
-                    scrollLeft = wrapper.scrollLeft;
-                });
-
-                wrapper.addEventListener('touchmove', e => {
-                    if (!touchStartX) return;
-                    e.preventDefault();
-                    const x = e.touches[0].pageX - wrapper.offsetLeft;
-                    const walk = (x - touchStartX) * 2;
-                    wrapper.scrollLeft = scrollLeft - walk;
-                }, { passive: false });
-
-                wrapper.addEventListener('touchend', () => {
-                    touchStartX = null;
-                });
-
-                // Set initial cursor
-                wrapper.style.cursor = 'grab';
+                activeButton.classList.remove('filter-inactive');
+                activeButton.classList.add('filter-active');
             }
         };
 
-        // ===== ADVANCED FILTERS MANAGER =====
+        // === ADVANCED FILTERS ===
         const AdvancedFilters = {
-            isVisible: false,
-            activeFilters: {},
-
-            toggle() {
-                const panel = document.getElementById('advancedFilters');
-                this.isVisible = !this.isVisible;
-                panel.style.display = this.isVisible ? 'block' : 'none';
-                
-                if (!this.isVisible) {
-                    this.clearAll();
+            matchesFilters(student, filters) {
+                if (filters.name && !student.fullName.toLowerCase().includes(filters.name.toLowerCase())) {
+                    return false;
                 }
+                if (filters.minGrade !== undefined && student.grade < filters.minGrade) {
+                    return false;
+                }
+                if (filters.maxGrade !== undefined && student.grade > filters.maxGrade) {
+                    return false;
+                }
+                if (filters.aleksDays) {
+                    const [low, high] = filters.aleksDays.split('-').map(Number);
+                    if (high !== undefined) {
+                        if (!(student.aleksDays >= low && student.aleksDays <= high)) return false;
+                    } else if (filters.aleksDays === '8+') {
+                        if (student.aleksDays < 8) return false;
+                    }
+                }
+                if (filters.visits) {
+                    const [lowV, highV] = filters.visits.split('-').map(Number);
+                    if (highV !== undefined) {
+                        if (!(student.thinkTankVisits >= lowV && student.thinkTankVisits <= highV)) return false;
+                    } else if (filters.visits === '3+') {
+                        if (student.thinkTankVisits < 3) return false;
+                    }
+                }
+                if (filters.stress) {
+                    if (filters.stress === 'high' && student.stress < 8) return false;
+                    if (filters.stress === 'medium' && (student.stress < 5 || student.stress > 7)) return false;
+                    if (filters.stress === 'low' && student.stress > 4) return false;
+                }
+                return true;
             },
 
             applyFilters() {
-                const filters = {
-                    name: document.getElementById('nameFilter').value.toLowerCase(),
-                    minGrade: Number(document.getElementById('minGrade').value) || 0,
-                    maxGrade: Number(document.getElementById('maxGrade').value) || 100,
-                    aleksDays: document.getElementById('aleksDaysFilter').value,
-                    visits: document.getElementById('visitsFilter').value,
-                    stress: document.getElementById('stressFilter').value
-                };
+                const name = document.getElementById('nameFilter').value;
+                const minGrade = Number(document.getElementById('minGrade').value) || undefined;
+                const maxGrade = Number(document.getElementById('maxGrade').value) || undefined;
+                const aleksDays = document.getElementById('aleksDaysFilter').value;
+                const visits = document.getElementById('visitsFilter').value;
+                const stress = document.getElementById('stressFilter').value;
 
-                this.activeFilters = filters;
+                const filters = {};
+                if (name) filters.name = name;
+                if (minGrade !== undefined) filters.minGrade = minGrade;
+                if (maxGrade !== undefined) filters.maxGrade = maxGrade;
+                if (aleksDays) filters.aleksDays = aleksDays;
+                if (visits) filters.visits = visits;
+                if (stress) filters.stress = stress;
+
                 StudentManager.applyAdvancedFilters(filters);
                 this.updateResultCount();
             },
@@ -2025,94 +2142,741 @@
                 document.getElementById('aleksDaysFilter').value = '';
                 document.getElementById('visitsFilter').value = '';
                 document.getElementById('stressFilter').value = '';
-                
-                this.activeFilters = {};
                 StudentManager.clearAdvancedFilters();
-                this.updateResultCount();
+                document.getElementById('filterResultCount').textContent = '';
             },
 
             updateResultCount() {
                 const count = StudentManager.getFilteredCount();
-                const resultElement = document.getElementById('filterResultCount');
-                if (resultElement) {
-                    resultElement.textContent = `Showing ${count} of ${DataManager.students.length} students`;
-                }
-            },
-
-            matchesFilters(student, filters) {
-                if (filters.name && !student.fullName.toLowerCase().includes(filters.name)) {
-                    return false;
-                }
-                
-                if (student.grade < filters.minGrade || student.grade > filters.maxGrade) {
-                    return false;
-                }
-                
-                if (filters.aleksDays) {
-                    const days = student.aleksDays;
-                    if (filters.aleksDays === '0-3' && days > 3) return false;
-                    if (filters.aleksDays === '4-7' && (days < 4 || days > 7)) return false;
-                    if (filters.aleksDays === '8+' && days < 8) return false;
-                }
-                
-                if (filters.visits) {
-                    const visits = student.thinkTankVisits;
-                    if (filters.visits === '0' && visits !== 0) return false;
-                    if (filters.visits === '1-2' && (visits < 1 || visits > 2)) return false;
-                    if (filters.visits === '3+' && visits < 3) return false;
-                }
-                
-                if (filters.stress) {
-                    const stress = student.stress;
-                    if (filters.stress === 'low' && stress > 4) return false;
-                    if (filters.stress === 'medium' && (stress < 5 || stress > 7)) return false;
-                    if (filters.stress === 'high' && stress < 8) return false;
-                }
-                
-                return true;
+                const el = document.getElementById('filterResultCount');
+                el.textContent = `${count} result${count !== 1 ? 's' : ''}`;
             }
         };
 
-        // ===== MAIN DASHBOARD CONTROLLER =====
+        // === CORE DASHBOARD CONTROLS ===
         const Dashboard = {
             init() {
-                try {
-                    DataManager.generateStudents();
-                    this.refresh();
-                    Timeline.init();
-                    StudentManager.updateSortButtons(); // Initialize sort button states
-                    document.getElementById('lastUpdated').textContent = new Date().toLocaleString();
-                    console.log('Dashboard initialized successfully');
-                } catch (error) {
-                    console.error('Dashboard initialization failed:', error);
-                    this.showError('Dashboard failed to load. Please refresh the page.');
-                }
+                DataManager.generateStudents();
+                StatsManager.update();
+                ChartManager.createAll();
+                StudentManager.display();
+                Timeline.init();
+                document.getElementById('lastUpdated').textContent = new Date().toLocaleString();
             },
 
             refresh() {
                 StatsManager.update();
                 ChartManager.createAll();
                 StudentManager.display();
-            },
-
-            showError(message) {
-                // Simple error display - could be enhanced with a proper modal
-                alert(`Error: ${message}`);
+                document.getElementById('lastUpdated').textContent = new Date().toLocaleString();
             }
         };
 
-        // ===== INITIALIZE DASHBOARD =====
-        document.addEventListener('DOMContentLoaded', () => {
-            Dashboard.init();
-        });
+        // === NEW FEATURE: PREDICTIVE ANALYTICS ===
+        const PredictiveAnalytics = {
+            calculateRiskScore(student) {
+                let riskScore = 0;
+                
+                // Factors that increase risk
+                if (student.grade < 70) riskScore += 25;
+                else if (student.grade < 80) riskScore += 15;
+                
+                if (student.aleksDays > 7) riskScore += 20;
+                else if (student.aleksDays > 3) riskScore += 10;
+                
+                if (student.thinkTankVisits === 0) riskScore += 15;
+                
+                if (student.stress > 7) riskScore += 20;
+                if (student.confidence < 4) riskScore += 20;
+                
+                // Trend analysis
+                if (student.attendanceData) {
+                    const recentAttendance = student.attendanceData.data.slice(-5);
+                    const absences = recentAttendance.filter(a => a === 0).length;
+                    if (absences >= 3) riskScore += 15;
+                }
+                
+                return Math.min(100, riskScore);
+            },
 
-        // ===== GLOBAL FUNCTIONS =====
-        // Make objects globally accessible for onclick handlers
-        window.StudentProfile = StudentProfile;
-        window.Timeline = Timeline;
-        window.AdvancedFilters = AdvancedFilters;
-        window.StudentManager = StudentManager;
-        window.StudentForm = StudentForm;
+            predictStatusChange(student) {
+                const riskScore = this.calculateRiskScore(student);
+                
+                if (student.status === 'green' && riskScore > 60) {
+                    return { prediction: 'yellow', confidence: riskScore };
+                } else if (student.status === 'yellow' && riskScore > 80) {
+                    return { prediction: 'red', confidence: riskScore };
+                } else if (student.status === 'yellow' && riskScore < 30) {
+                    return { prediction: 'green', confidence: 100 - riskScore };
+                }
+                
+                return null;
+            },
+
+            createPredictiveChart() {
+                const ctx = document.getElementById('riskPredictionChart');
+                if (!ctx) return;
+
+                const predictions = {
+                    'Likely to Improve': 0,
+                    'Stable': 0,
+                    'At Risk - Yellow': 0,
+                    'At Risk - Red': 0
+                };
+
+                DataManager.students.forEach(student => {
+                    const prediction = this.predictStatusChange(student);
+                    if (!prediction) {
+                        predictions['Stable']++;
+                    } else if (prediction.prediction === 'green') {
+                        predictions['Likely to Improve']++;
+                    } else if (prediction.prediction === 'yellow') {
+                        predictions['At Risk - Yellow']++;
+                    } else if (prediction.prediction === 'red') {
+                        predictions['At Risk - Red']++;
+                    }
+                });
+
+                new Chart(ctx.getContext('2d'), {
+                    type: 'pie',
+                    data: {
+                        labels: Object.keys(predictions),
+                        datasets: [{
+                            data: Object.values(predictions),
+                            backgroundColor: ['#27ae60', '#3498db', '#f39c12', '#e74c3c']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { position: 'bottom' }
+                        }
+                    }
+                });
+            }
+        };
+
+        // === NEW FEATURE: ALERTS SYSTEM ===
+        const AlertsSystem = {
+            alerts: [],
+            
+            checkAlerts() {
+                this.alerts = [];
+                
+                DataManager.students.forEach(student => {
+                    // Critical alerts
+                    if (student.aleksDays > 10) {
+                        this.alerts.push({
+                            type: 'critical',
+                            icon: '🚨',
+                            message: `${student.fullName} hasn't logged into ALEKS for ${student.aleksDays} days`,
+                            studentId: student.id
+                        });
+                    }
+                    
+                    if (student.grade < 60 && student.thinkTankVisits === 0) {
+                        this.alerts.push({
+                            type: 'critical',
+                            icon: '⚠️',
+                            message: `${student.fullName} is failing (${student.grade}%) and hasn't visited Think Tank`,
+                            studentId: student.id
+                        });
+                    }
+                    
+                    // Warning alerts
+                    const prediction = PredictiveAnalytics.predictStatusChange(student);
+                    if (prediction && prediction.confidence > 70) {
+                        this.alerts.push({
+                            type: 'warning',
+                            icon: '📉',
+                            message: `${student.fullName} is predicted to move to ${prediction.prediction} status (${prediction.confidence}% confidence)`,
+                            studentId: student.id
+                        });
+                    }
+                });
+                
+                this.displayAlerts();
+            },
+            
+            displayAlerts() {
+                const container = document.getElementById('alertsContainer');
+                const panel = document.getElementById('alertsPanel');
+                
+                if (this.alerts.length === 0) {
+                    panel.style.display = 'none';
+                    return;
+                }
+                
+                panel.style.display = 'block';
+                container.innerHTML = this.alerts.slice(0, 5).map((alert, index) => `
+                    <div class="alert-item ${alert.type}">
+                        <div class="alert-icon">${alert.icon}</div>
+                        <div class="alert-content">
+                            ${alert.message}
+                            <button onclick="StudentProfile.show('${alert.studentId}')" style="margin-left: 10px; text-decoration: underline; background: none; border: none; cursor: pointer; color: #007bff;">View Profile</button>
+                        </div>
+                        <button class="alert-dismiss" onclick="AlertsSystem.dismissAlert(${index})">×</button>
+                    </div>
+                `).join('');
+            },
+            
+            dismissAlert(index) {
+                this.alerts.splice(index, 1);  
+                this.displayAlerts();
+            }
+        };
+
+        // === NEW FEATURE: BULK ACTIONS ===
+        const BulkActions = {
+            selectionMode: false,
+            selectedStudents: new Set(),
+            
+            toggleSelectionMode() {
+                this.selectionMode = !this.selectionMode;
+                StudentManager.display();
+                
+                if (!this.selectionMode) {
+                    this.clearSelection();
+                }
+            },
+            
+            toggleStudentSelection(studentId) {
+                if (this.selectedStudents.has(studentId)) {
+                    this.selectedStudents.delete(studentId);
+                } else {
+                    this.selectedStudents.add(studentId);
+                }
+                this.updateBulkActionsBar();
+            },
+            
+            updateBulkActionsBar() {
+                const bar = document.getElementById('bulkActionsBar');
+                const count = document.getElementById('selectedCount');
+                
+                if (this.selectedStudents.size > 0) {
+                    bar.classList.add('show');
+                    count.textContent = `${this.selectedStudents.size} students selected`;
+                } else {
+                    bar.classList.remove('show');
+                }
+            },
+            
+            clearSelection() {
+                this.selectedStudents.clear();
+                this.updateBulkActionsBar();
+                StudentManager.display();
+            },
+            
+            sendEmail() {
+                const students = Array.from(this.selectedStudents).map(id => DataManager.getStudentById(id));
+                const emails = students.map(s => `${s.firstName.toLowerCase()}.${s.lastName.toLowerCase()}@email.arizona.edu`).join(', ');
+                
+                alert(`Opening email client for:\n${emails}\n\nSubject: Think Tank Check-in`);
+                // In real implementation, would integrate with email service
+            },
+            
+            scheduleCheckin() {
+                const date = prompt('Schedule check-in for date (YYYY-MM-DD):');
+                if (date) {
+                    alert(`Check-in scheduled for ${this.selectedStudents.size} students on ${date}`);
+                    // Would integrate with calendar system
+                }
+            },
+            
+            assignGoals() {
+                const goal = prompt('Enter goal for selected students:');
+                if (goal) {
+                    this.selectedStudents.forEach(studentId => {
+                        const student = DataManager.getStudentById(studentId);
+                        if (student) {
+                            student.goals = student.goals || [];
+                            student.goals.push({
+                                text: goal,
+                                progress: 0,
+                                dateAssigned: new Date().toISOString()
+                            });
+                        }
+                    });
+                    alert(`Goal assigned to ${this.selectedStudents.size} students`);
+                    this.clearSelection();
+                }
+            },
+            
+            exportSelected() {
+                const students = Array.from(this.selectedStudents).map(id => DataManager.getStudentById(id));
+                DataExport.exportStudentsToCSV(students, 'selected_students');
+            }
+        };
+
+        // === NEW FEATURE: DATA EXPORT/IMPORT ===
+        const DataExport = {
+            exportToCSV() {
+                const csv = this.convertToCSV(DataManager.students);
+                this.downloadFile(csv, 'students_export.csv', 'text/csv');
+            },
+            
+            exportToJSON() {
+                const json = JSON.stringify(DataManager.students, null, 2);
+                this.downloadFile(json, 'students_export.json', 'application/json');
+            },
+            
+            exportStudentsToCSV(students, filename = 'students') {
+                const csv = this.convertToCSV(students);
+                this.downloadFile(csv, `${filename}.csv`, 'text/csv');
+            },
+            
+            convertToCSV(students) {
+                const headers = ['ID', 'Name', 'Grade', 'ALEKS Days', 'ALEKS Topics', 'Think Tank Visits', 'Stress', 'Confidence', 'Wellness', 'Status'];
+                const rows = students.map(s => [
+                    s.id,
+                    s.fullName,
+                    s.grade,
+                    s.aleksDays,
+                    s.aleksTopics,
+                    s.thinkTankVisits,
+                    s.stress,
+                    s.confidence,
+                    s.wellness,
+                    s.status
+                ]);
+                
+                return [headers, ...rows].map(row => row.join(',')).join('\n');
+            },
+            
+            downloadFile(content, filename, type) {
+                const blob = new Blob([content], { type });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;  
+                a.click();
+                URL.revokeObjectURL(url);
+            }
+        };
+
+        const DataImport = {
+            showImportDialog() {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = '.csv,.json';
+                input.onchange = (e) => this.handleFileImport(e.target.files[0]);
+                input.click();
+            },
+            
+            handleFileImport(file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    try {
+                        if (file.name.endsWith('.json')) {
+                            const data = JSON.parse(e.target.result);
+                            this.importStudents(data);
+                        } else if (file.name.endsWith('.csv')) {
+                            this.importFromCSV(e.target.result);
+                        }
+                    } catch (error) {
+                        alert('Error importing file: ' + error.message);
+                    }
+                };
+                reader.readAsText(file);
+            },
+            
+            importStudents(students) {
+                // Validate and merge with existing data
+                const imported = students.filter(s => s.firstName && s.lastName && s.grade !== undefined);
+                imported.forEach(s => {
+                    DataManager.addStudent({
+                        firstName: s.firstName,
+                        lastName: s.lastName,
+                        grade: s.grade,
+                        aleksDays: s.aleksDays || 0,
+                        aleksTopics: s.aleksTopics || 0,
+                        thinkTankVisits: s.thinkTankVisits || 0,
+                        stress: s.stress || 5,
+                        confidence: s.confidence || 5,
+                        wellness: s.wellness || 50
+                    });
+                });
+                Dashboard.refresh();
+                alert(`Successfully imported ${imported.length} students`);
+            },
+            
+            importFromCSV(csvContent) {
+                // Simple CSV parser
+                const lines = csvContent.split('\n');
+                const headers = lines[0].split(',');
+                const students = [];
+                
+                for (let i = 1; i < lines.length; i++) {
+                    if (lines[i].trim()) {
+                        const values = lines[i].split(',');
+                        const student = {
+                            firstName: values[1]?.split(' ')[0] || '',
+                            lastName: values[1]?.split(' ')[1] || '',
+                            grade: Number(values[2]) || 0,
+                            aleksDays: Number(values[3]) || 0,
+                            aleksTopics: Number(values[4]) || 0,
+                            thinkTankVisits: Number(values[5]) || 0,
+                            stress: Number(values[6]) || 5,
+                            confidence: Number(values[7]) || 5,
+                            wellness: Number(values[8]) || 50
+                        };
+                        students.push(student);
+                    }
+                }
+                
+                this.importStudents(students);
+            }
+        };
+
+        // === NEW FEATURE: STUDENT COMPARISON ===
+        const StudentComparison = {
+            show(studentId) {
+                const student = DataManager.getStudentById(studentId);
+                if (!student) return;
+                
+                const panel = document.getElementById('comparisonPanel');
+                const content = document.getElementById('comparisonContent');
+                
+                // Calculate class averages
+                const averages = {
+                    grade: DataManager.students.reduce((sum, s) => sum + s.grade, 0) / DataManager.students.length,
+                    aleksDays: DataManager.students.reduce((sum, s) => sum + s.aleksDays, 0) / DataManager.students.length,
+                    aleksTopics: DataManager.students.reduce((sum, s) => sum + s.aleksTopics, 0) / DataManager.students.length,
+                    thinkTankVisits: DataManager.students.reduce((sum, s) => sum + s.thinkTankVisits, 0) / DataManager.students.length,
+                    wellness: DataManager.students.reduce((sum, s) => sum + s.wellness, 0) / DataManager.students.length
+                };
+                
+                content.innerHTML = `
+                    <h4>Comparing ${student.fullName} to Class Average</h4>
+                    ${this.createComparisonBar('Grade', student.grade, averages.grade, 100, '%')}
+                    ${this.createComparisonBar('ALEKS Topics', student.aleksTopics, averages.aleksTopics, 40, '')}
+                    ${this.createComparisonBar('Think Tank Visits', student.thinkTankVisits, averages.thinkTankVisits, 10, '')}
+                    ${this.createComparisonBar('Wellness Score', student.wellness, averages.wellness, 100, '')}
+                    ${this.createComparisonBar('Days Since ALEKS', student.aleksDays, averages.aleksDays, 14, ' days', true)}
+                `;
+                
+                panel.style.display = 'block';
+            },
+            
+            createComparisonBar(label, studentValue, avgValue, maxValue, unit, inverse = false) {
+                const studentPercent = (studentValue / maxValue) * 100;
+                const avgPercent = (avgValue / maxValue) * 100;
+                
+                return `
+                    <div class="comparison-metric">
+                        <div style="width: 150px;">${label}:</div>
+                        <div class="comparison-bar">
+                            <div class="comparison-fill" style="width: ${avgPercent}%; background: #3498db;"></div>
+                            <div class="comparison-fill student" style="width: ${studentPercent}%;"></div>
+                        </div>
+                        <div style="width: 100px; text-align: right;">
+                            <span style="color: #e74c3c;">${Math.round(studentValue)}${unit}</span> /
+                            <span style="color: #3498db;">${Math.round(avgValue)}${unit}</span>
+                        </div>
+                    </div>
+                `;
+            }
+        };
+
+        // === NEW FEATURE: REPORTS ===
+        const Reports = {
+            generateReport() {
+                const reportType = prompt('Report type:\n1. Individual Student\n2. At-Risk Students\n3. Full Class Report\n\nEnter number:');
+                
+                switch(reportType) {
+                    case '1':
+                        this.generateIndividualReport();
+                        break;
+                    case '2':
+                        this.generateAtRiskReport();
+                        break;
+                    case '3':
+                        this.generateClassReport();
+                        break;
+                }
+            },
+            
+            generateIndividualReport() {
+                const studentId = prompt('Enter student ID:');
+                const student = DataManager.getStudentById(studentId);
+                if (!student) {
+                    alert('Student not found');
+                    return;
+                }
+                
+                const report = `
+                    <div style="font-family: Arial; max-width: 800px; margin: 0 auto;">
+                        <h1 style="text-align: center;">Student Report</h1>
+                        <h2>${student.fullName}</h2>
+                        <p><strong>Date:</strong> ${new Date().toLocaleDateString()}</p>
+                        
+                        <h3>Academic Performance</h3>
+                        <ul>
+                            <li>Current Grade: ${student.grade}%</li>
+                            <li>ALEKS Topics Completed: ${student.aleksTopics}</li>
+                            <li>Days Since Last ALEKS Login: ${student.aleksDays}</li>
+                        </ul>
+                        
+                        <h3>Support Utilization</h3>
+                        <ul>
+                            <li>Think Tank Visits: ${student.thinkTankVisits}</li>
+                            <li>Wellness Score: ${student.wellness}/100</li>
+                            <li>Status: ${student.status}</li>
+                        </ul>
+                        
+                        <h3>Mental Health Indicators</h3>
+                        <ul>
+                            <li>Stress Level: ${student.stress}/10</li>
+                            <li>Confidence Level: ${student.confidence}/10</li>
+                        </ul>
+                        
+                        <h3>Recent Survey Responses</h3>
+                        <p><em>Stress:</em> "${student.stressQuote}"</p>
+                        <p><em>Confidence:</em> "${student.confidenceQuote}"</p>
+                        
+                        <h3>Recommendations</h3>
+                        <p>${this.getRecommendations(student)}</p>
+                    </div>
+                `;
+                
+                const printWindow = window.open('', '', 'width=800,height=600');
+                printWindow.document.write(report);
+                printWindow.document.close();
+                printWindow.print();
+            },
+            
+            generateAtRiskReport() {
+                const atRiskStudents = DataManager.students.filter(s => s.status === 'red' || s.status === 'yellow');
+                
+                const report = `
+                    <div style="font-family: Arial; max-width: 800px; margin: 0 auto;">
+                        <h1 style="text-align: center;">At-Risk Students Report</h1>
+                        <p><strong>Date:</strong> ${new Date().toLocaleDateString()}</p>
+                        <p><strong>Total At-Risk:</strong> ${atRiskStudents.length}</p>
+                        
+                        <h2>Critical (Red Status)</h2>
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr style="background: #f0f0f0;">
+                                    <th style="border: 1px solid #ddd; padding: 8px;">Name</th>
+                                    <th style="border: 1px solid #ddd; padding: 8px;">Grade</th>
+                                    <th style="border: 1px solid #ddd; padding: 8px;">Days Since ALEKS</th>
+                                    <th style="border: 1px solid #ddd; padding: 8px;">Wellness</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${atRiskStudents.filter(s => s.status === 'red').map(s => `
+                                    <tr>
+                                        <td style="border: 1px solid #ddd; padding: 8px;">${s.fullName}</td>
+                                        <td style="border: 1px solid #ddd; padding: 8px;">${s.grade}%</td>
+                                        <td style="border: 1px solid #ddd; padding: 8px;">${s.aleksDays}</td>
+                                        <td style="border: 1px solid #ddd; padding: 8px;">${s.wellness}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+                
+                const printWindow = window.open('', '', 'width=800,height=600');
+                printWindow.document.write(report);
+                printWindow.document.close();
+                printWindow.print();
+            },
+            
+            generateClassReport() {
+                alert('Full class report generation - would create comprehensive PDF');
+            },
+            
+            getRecommendations(student) {
+                const recommendations = [];
+                
+                if (student.grade < 70) {
+                    recommendations.push('Schedule immediate academic intervention');
+                }
+                if (student.aleksDays > 5) {
+                    recommendations.push('Follow up on ALEKS engagement');
+                }
+                if (student.stress > 7) {
+                    recommendations.push('Refer to counseling services');
+                }
+                if (student.thinkTankVisits === 0) {
+                    recommendations.push('Encourage Think Tank utilization');
+                }
+                
+                return recommendations.length > 0 ? recommendations.join('; ') : 'Continue current support strategies';
+            }
+        };
+
+        // === NEW FEATURE: DASHBOARD CUSTOMIZATION ===
+        const DashboardCustomizer = {
+            widgets: {
+                alerts: { name: 'Alerts Panel', enabled: true },
+                comparison: { name: 'Student Comparison', enabled: false },
+                predictive: { name: 'Predictive Analytics', enabled: false },
+                timeline: { name: 'Timeline', enabled: true }
+            },
+            
+            toggle() {
+                const content = `
+                    <div class="modal" id="customizeModal" style="display: block;">
+                        <div class="modal-content" style="max-width: 500px;">
+                            <button class="modal-close" onclick="DashboardCustomizer.close()">×</button>
+                            <h2>Customize Dashboard</h2>
+                            <p>Select which widgets to display:</p>
+                            ${Object.entries(this.widgets).map(([key, widget]) => `
+                                <div class="widget-toggle">
+                                    <input type="checkbox" id="widget_${key}" ${widget.enabled ? 'checked' : ''} 
+                                           onchange="DashboardCustomizer.toggleWidget('${key}')">
+                                    <label for="widget_${key}">${widget.name}</label>
+                                </div>
+                            `).join('')}
+                            <button class="filter-button filter-active" onclick="DashboardCustomizer.save()" style="margin-top: 20px;">
+                                Save Preferences
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.insertAdjacentHTML('beforeend', content);
+            },
+            
+            close() {
+                const modal = document.getElementById('customizeModal');
+                if (modal) modal.remove();
+            },
+            
+            toggleWidget(key) {
+                this.widgets[key].enabled = !this.widgets[key].enabled;
+            },
+            
+            save() {
+                localStorage.setItem('dashboardWidgets', JSON.stringify(this.widgets));
+                this.applySettings();
+                this.close();
+            },
+            
+            load() {
+                const saved = localStorage.getItem('dashboardWidgets');
+                if (saved) {
+                    this.widgets = JSON.parse(saved);
+                    this.applySettings();
+                }
+            },
+            
+            applySettings() {
+                document.getElementById('alertsPanel').style.display = this.widgets.alerts.enabled ? 'block' : 'none';
+                document.getElementById('comparisonPanel').style.display = this.widgets.comparison.enabled ? 'block' : 'none';
+                document.getElementById('predictiveChart').style.display = this.widgets.predictive.enabled ? 'block' : 'none';
+                
+                if (this.widgets.predictive.enabled) {
+                    PredictiveAnalytics.createPredictiveChart();
+                }
+            }
+        };
+
+        // === ENHANCE EXISTING STUDENT MANAGER ===
+        const enhancedStudentManager = {
+            ...StudentManager,
+            
+            display() {
+                const container = document.getElementById('studentContainer');
+                const filteredStudents = this.getFilteredStudents();
+
+                if (this.currentView === 'list') {
+                    container.innerHTML = filteredStudents.map(student => {
+                        const concerns = this.getConcerns(student);
+                        const prediction = PredictiveAnalytics.predictStatusChange(student);
+                        const predictionBadge = prediction && prediction.confidence > 70 ? 
+                            `<span class="prediction-badge ${prediction.prediction === 'red' ? 'warning' : ''}">
+                                ⚡ Risk: ${prediction.prediction}
+                            </span>` : '';
+                        
+                        return `
+                            <div class="student-item student-${student.status} ${BulkActions.selectionMode ? 'selectable' : ''}" 
+                                 onclick="${BulkActions.selectionMode ? `BulkActions.toggleStudentSelection('${student.id}')` : `StudentProfile.show('${student.id}')`}">
+                                ${BulkActions.selectionMode ? `<input type="checkbox" class="student-checkbox" ${BulkActions.selectedStudents.has(student.id) ? 'checked' : ''}>` : ''}
+                                <div class="student-status">${student.statusEmoji}</div>
+                                <div class="student-info">
+                                    <div class="student-name">
+                                        ${student.fullName}
+                                        ${predictionBadge}
+                                    </div>
+                                    <div class="student-details">
+                                        ${concerns.length > 0 ? concerns.join(' • ') : 'All indicators positive'}
+                                    </div>
+                                </div>
+                                <div class="student-score" style="color: ${this.getStatusColor(student.status)}">
+                                    ${student.wellness}
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                } else {
+                    container.innerHTML = `
+                        <div class="student-grid">
+                            ${filteredStudents.map(student => `
+                                <div class="student-card student-${student.status}" onclick="StudentProfile.show('${student.id}')">
+                                    <div class="student-status" style="font-size:2em;">${student.statusEmoji}</div>
+                                    <div class="student-name" style="margin: 8px 0 4px 0; font-weight:bold;">${student.fullName}</div>
+                                    <div style="color:#7f8c8d; font-size:0.95em; margin-bottom:6px;">${student.grade}% • ${student.wellness}/100</div>
+                                    <div class="student-score" style="font-size:1.3em; color:${this.getStatusColor(student.status)}">${student.type.charAt(0).toUpperCase() + student.type.slice(1)}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                }
+            }
+        };
+
+        Object.assign(StudentManager, enhancedStudentManager);
+
+        // === ENHANCE STUDENT PROFILE ===
+        const enhancedStudentProfile = {
+            ...StudentProfile,
+            
+            show(studentId) {
+                StudentProfile.__proto__.show.call(this, studentId);
+                
+                setTimeout(() => {
+                    StudentComparison.show(studentId);
+                }, 100);
+            }
+        };
+
+        Object.assign(StudentProfile, enhancedStudentProfile);
+
+        // === ENHANCED DASHBOARD INITIALIZATION ===
+        const enhancedDashboard = {
+            ...Dashboard,
+            
+            init() {
+                Dashboard.__proto__.init.call(this);
+                
+                DashboardCustomizer.load();
+                AlertsSystem.checkAlerts();
+                
+                setInterval(() => {
+                    AlertsSystem.checkAlerts();
+                }, 60000);
+            },
+            
+            refresh() {
+                Dashboard.__proto__.refresh.call(this);
+                
+                AlertsSystem.checkAlerts();
+                if (DashboardCustomizer.widgets.predictive.enabled) {
+                    PredictiveAnalytics.createPredictiveChart();
+                }
+            }
+        };
+
+        Object.assign(Dashboard, enhancedDashboard);
+
+        // === INITIALIZE ENHANCED DASHBOARD ===
+        document.addEventListener('DOMContentLoaded', () => {
+            enhancedDashboard.init();
+        });
     </script>
 </body>
 </html>
