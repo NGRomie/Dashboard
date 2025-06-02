@@ -38,7 +38,6 @@
             color: #7f8c8d;
             font-size: 1.2em;
         }
-      
 
         .stats-grid {
             display: grid;
@@ -205,25 +204,300 @@
             margin-top: 20px;
         }
 
-        .quote-box {
-            background: #f8f9fa;
-            border-left: 4px solid #3498db;
-            padding: 15px;
-            margin: 10px 0;
+        /* Grid View Styles */
+        .student-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+        }
+
+        .student-card {
+            background: #f7f9fc;
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: transform 0.2s;
+            text-align: center;
+            border-left: 5px solid transparent;
+        }
+
+        .student-card.student-green { border-left-color: #27ae60; }
+        .student-card.student-yellow { border-left-color: #f39c12; }
+        .student-card.student-red { border-left-color: #e74c3c; }
+        .student-card:hover {
+            transform: translateY(-3px) scale(1.03);
+        }
+
+        /* Timeline Styles */
+        #milestoneTimelineWrapper {
+            background: #fff;
+            border-radius: 15px;
+            margin-bottom: 28px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+            padding: 16px 18px;
+            overflow-x: auto;
+            overflow-y: visible;
+            height: 120px;
+        }
+
+        .timeline-controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+
+        .milestone-timeline {
+            position: relative;
+            min-width: 900px;
+            height: 100%;
+            box-sizing: border-box;
+            background-image: repeating-linear-gradient(
+                to right,
+                transparent,
+                transparent calc(100% / 16 - 1px),
+                #ccc calc(100% / 16 - 1px),
+                #ccc calc(100% / 16)
+            );
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+
+        .timeline-track {
+            position: absolute;
+            left: 0; right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 2px;
+            background: rgba(12,35,75,0.92);
+            border-radius: 1px;
+            z-index: 0;
+        }
+
+        .timeline-band {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 2px;
+            border-radius: 1px;
+            background: rgba(255,215,0,0.6);
+            z-index: 1;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            background: #AB0520;
+            border: 2px solid #fff;
+            box-shadow: 0 0 6px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+            color: #fff;
+            z-index: 2;
+            cursor: pointer;
+        }
+
+        .timeline-dot .popover {
+            display: none;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 100%;
+            margin-bottom: 6px;
+            background: #fff;
+            color: #071C3B;
+            padding: 6px 10px;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            white-space: nowrap;
+            z-index: 5;
+            font-size: 0.9em;
+        }
+
+        .timeline-dot:hover .popover {
+            display: block;
+        }
+
+        .timeline-month-shade {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            border-left: 1px solid rgba(0,0,0,0.1);
+            border-right: 1px solid rgba(0,0,0,0.1);
+            z-index: 0;
+        }
+
+        .timeline-today-marker {
+            position: absolute;
+            top: -20px;
+            transform: translateX(-50%);
+            background: #e74c3c;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            white-space: nowrap;
+            z-index: 4;
+        }
+
+        .timeline-current-line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e74c3c;
+            z-index: 3;
+        }
+
+        #milestoneTimelineWrapper {
+            background: #fff;
+            border-radius: 15px;
+            margin-bottom: 28px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+            padding: 16px 18px;
+            overflow-x: auto;
+            overflow-y: visible;
+            height: 140px;
+            position: relative;
+        }
+
+        #milestoneTimelineWrapper::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        #milestoneTimelineWrapper::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        #milestoneTimelineWrapper::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+
+        #milestoneTimelineWrapper::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+
+        /* Advanced Filter Styles */
+        .advanced-filters {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-input {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.9em;
+            min-width: 120px;
+        }
+
+        /* Coach Notes Styles */
+        .coach-note-summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 8px;
             border-radius: 5px;
-            font-style: italic;
+            transition: background-color 0.2s;
         }
 
-        .quote-box::before {
-            content: '"';
-            font-size: 1.5em;
-            color: #3498db;
+        .coach-note-summary:hover {
+            background-color: #f8f9fa;
         }
 
-        .quote-box::after {
-            content: '"';
-            font-size: 1.5em;
-            color: #3498db;
+        .coach-note-details {
+            color: #555;
+            margin-left: 14px;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: relative;
+            width: 80%;
+            max-width: 900px;
+            margin: 50px auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .modal-close:hover {
+            color: #333;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1em;
+            background: #f8f9fa;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
         }
 
         @media (max-width: 768px) {
@@ -239,168 +513,35 @@
                 flex-direction: column;
                 text-align: center;
             }
-        }
-        .student-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 18px;
-}
-.student-card {
-    background: #f7f9fc;
-    border-radius: 12px;
-    padding: 18px;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-    cursor: pointer;
-    transition: transform 0.2s;
-    text-align: center;
-    border-left: 5px solid transparent;
-}
-.student-card.student-green { border-left-color: #27ae60; }
-.student-card.student-yellow { border-left-color: #f39c12; }
-.student-card.student-red { border-left-color: #e74c3c; }
-.student-card:hover {
-    transform: translateY(-3px) scale(1.03);
-}
-#studentFormModal input[type="text"],
-#studentFormModal input[type="number"] {
-    font-size: 1em;
-    padding: 7px 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    margin-bottom: 6px;
-    background: #f4f7fa;
-}
-#studentFormModal label {
-    font-weight: bold;
-    color: #2c3e50;
-}
-        #milestoneTimelineWrapper {
-          background: #fff;
-          border-radius: 15px;
-          margin-bottom: 28px;
-          box-shadow: 0 5px 18px rgba(0,0,0,0.08);
-          padding: 16px 18px;
-          overflow-x: auto;
-          overflow-y: visible;
-          height: 120px;
-        }
-.timeline-controls {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 10px;
-  align-items: center;
-}
-        .milestone-timeline {
-          position: relative;
-          min-width: 900px;
-          height: 100%;
-          box-sizing: border-box;
-          background-image: repeating-linear-gradient(
-            to right,
-            transparent,
-            transparent calc(100% / 16 - 1px),
-            #ccc calc(100% / 16 - 1px),
-            #ccc calc(100% / 16)
-          );
-          background-repeat: no-repeat;
-          background-size: 100% 100%;
-        }
-        .timeline-track {
-          position: absolute;
-          left: 0; right: 0;
-          top: 50%;
-          transform: translateY(-50%);
-          height: 2px;
-          background: rgba(12,35,75,0.92);
-          border-radius: 1px;
-          z-index: 0;
-        }
-        .timeline-band {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          height: 2px;
-          border-radius: 1px;
-          background: rgba(255,215,0,0.6);
-          z-index: 1;
-        }
-        .timeline-dot {
-          position: absolute;
-          top: 50%;
-          transform: translate(-50%, -50%);
-          width: 20px; height: 20px;
-          border-radius: 50%;
-          background: #AB0520;
-          border: 2px solid #fff;
-          box-shadow: 0 0 6px rgba(0,0,0,0.2);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 0.9em;
-          color: #fff;
-          z-index: 2;
-        }
 
-        /* Timeline dot hover popover */
-        .timeline-dot .popover {
-          display: none;
-          position: absolute;
-          left: 50%;
-          transform: translateX(-50%);
-          bottom: 100%;
-          margin-bottom: 6px;
-          background: #fff;
-          color: #071C3B;
-          padding: 6px 10px;
-          border-radius: 6px;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-          white-space: nowrap;
-          z-index: 5;
-          font-size: 0.9em;
+            .filters {
+                flex-direction: column;
+                align-items: stretch;
+            }
         }
-        .timeline-dot:hover .popover {
-          display: block;
-        }
-
-
-</style>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const wrapper = document.getElementById('milestoneTimelineWrapper');
-    const track = document.querySelector('.timeline-track');
-    const dots = document.querySelectorAll('.timeline-dot');
-    // Center the track and dots vertically
-    const wrapperHeight = wrapper.clientHeight;
-    const centerY = wrapperHeight / 2;
-    if (track) {
-      track.style.top = centerY + 'px';
-      track.style.transform = 'translateY(-50%)';
-    }
-    dots.forEach(dot => {
-      dot.style.top = centerY + 'px';
-      dot.style.transform = 'translate(-50%, -50%)';
-    });
-  });
-</script>
+    </style>
 </head>
-    <body>
+<body>
     <div class="dashboard-header">
         <h1>🎯 Student Engagement Dashboard</h1>
         <p>University of Arizona Think Tank • Proactive Student Support System</p>
     </div>
-<!-- Horizontal Timeline Prototype -->
-<div id="milestoneTimelineWrapper">
-  <div class="timeline-controls">
-    <button class="filter-button filter-active" onclick="filterTimelineEvents('all'); updateTimelineControls(this)">All Events</button>
-    <button class="filter-button filter-inactive" onclick="filterTimelineEvents('registration'); updateTimelineControls(this)">Registration</button>
-    <button class="filter-button filter-inactive" onclick="filterTimelineEvents('exam'); updateTimelineControls(this)">Exam</button>
-    <button class="filter-button filter-inactive" onclick="filterTimelineEvents('holiday'); updateTimelineControls(this)">Holiday</button>
-    <button class="filter-button filter-inactive" onclick="filterTimelineEvents('outreach'); updateTimelineControls(this)">Outreach</button>
-    <button class="filter-button filter-inactive" onclick="filterTimelineEvents('custom'); updateTimelineControls(this)">Custom</button>
-    <button class="filter-button filter-active" style="margin-left:auto;" onclick="addCustomTimelineEvent()">+ Add Event</button>
-  </div>
-  <div id="milestoneTimeline" class="milestone-timeline"></div>
-</div>
+
+    <!-- Timeline Section -->
+    <div id="milestoneTimelineWrapper">
+        <div class="timeline-controls">
+            <button class="filter-button filter-active" onclick="window.Timeline.filter('all', this)">All Events</button>
+            <button class="filter-button filter-inactive" onclick="window.Timeline.filter('registration', this)">Registration</button>
+            <button class="filter-button filter-inactive" onclick="window.Timeline.filter('exam', this)">Exam</button>
+            <button class="filter-button filter-inactive" onclick="window.Timeline.filter('holiday', this)">Holiday</button>
+            <button class="filter-button filter-inactive" onclick="window.Timeline.filter('outreach', this)">Outreach</button>
+            <button class="filter-button filter-inactive" onclick="window.Timeline.filter('custom', this)">Custom</button>
+            <button class="filter-button filter-active" style="margin-left:auto;" onclick="window.Timeline.addCustomEvent()">+ Add Event</button>
+        </div>
+        <div id="milestoneTimeline" class="milestone-timeline"></div>
+    </div>
+
+    <!-- Stats Grid -->
     <div class="stats-grid">
         <div class="stat-card">
             <div class="stat-number green" id="greenCount">0</div>
@@ -420,6 +561,7 @@
         </div>
     </div>
 
+    <!-- Charts Grid -->
     <div class="charts-grid">
         <div class="chart-container">
             <div class="chart-title">Student Status Distribution</div>
@@ -443,969 +585,1534 @@
         </div>
     </div>
 
+    <!-- Filters -->
     <div class="filters">
         <span class="filter-label">Show Students:</span>
-        <button class="filter-button filter-active" onclick="filterStudents('all')">All Students</button>
-        <button class="filter-button filter-inactive" onclick="filterStudents('red')">🔴 Immediate Action</button>
-        <button class="filter-button filter-inactive" onclick="filterStudents('yellow')">🟡 Need Attention</button>
-        <button class="filter-button filter-inactive" onclick="filterStudents('green')">🟢 Doing Well</button>
+        <button class="filter-button filter-active" onclick="StudentManager.filter('all', this)">All Students</button>
+        <button class="filter-button filter-inactive" onclick="StudentManager.filter('red', this)">🔴 Immediate Action</button>
+        <button class="filter-button filter-inactive" onclick="StudentManager.filter('yellow', this)">🟡 Need Attention</button>
+        <button class="filter-button filter-inactive" onclick="StudentManager.filter('green', this)">🟢 Doing Well</button>
+        <button class="filter-button filter-inactive" onclick="AdvancedFilters.toggle()">🔍 Advanced Filters</button>
         <div style="margin-left: auto; display: flex; gap: 10px; align-items: center;">
+            <span class="filter-label">Sort:</span>
+            <button class="filter-button filter-active" id="sortWellnessBtn" onclick="StudentManager.setSortOrder('wellness')">📊 Wellness</button>
+            <button class="filter-button filter-inactive" id="sortAlphaBtn" onclick="StudentManager.setSortOrder('alphabetical')">🔤 A-Z</button>
             <span class="filter-label">View:</span>
-            <button class="filter-button filter-active" id="listViewBtn" onclick="toggleView('list')">📋 List</button>
-            <button class="filter-button filter-inactive" id="gridViewBtn" onclick="toggleView('grid')">⊞ Grid</button>
+            <button class="filter-button filter-active" id="listViewBtn" onclick="StudentManager.toggleView('list')">📋 List</button>
+            <button class="filter-button filter-inactive" id="gridViewBtn" onclick="StudentManager.toggleView('grid')">⊞ Grid</button>
         </div>
     </div>
-    <div style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
-        <button class="filter-button filter-active" onclick="openStudentForm()">+ Add Student</button>
+
+    <!-- Advanced Filters -->
+    <div class="advanced-filters" id="advancedFilters">
+        <div class="filter-row">
+            <span class="filter-label">Search by Name:</span>
+            <input type="text" class="filter-input" id="nameFilter" placeholder="Enter student name..." onkeyup="AdvancedFilters.applyFilters()">
+            
+            <span class="filter-label">Grade Range:</span>
+            <input type="number" class="filter-input" id="minGrade" placeholder="Min %" style="width:80px;" onchange="AdvancedFilters.applyFilters()">
+            <input type="number" class="filter-input" id="maxGrade" placeholder="Max %" style="width:80px;" onchange="AdvancedFilters.applyFilters()">
+        </div>
+        
+        <div class="filter-row">
+            <span class="filter-label">ALEKS Days:</span>
+            <select class="filter-input" id="aleksDaysFilter" onchange="AdvancedFilters.applyFilters()">
+                <option value="">Any</option>
+                <option value="0-3">0-3 days</option>
+                <option value="4-7">4-7 days</option>
+                <option value="8+">8+ days</option>
+            </select>
+            
+            <span class="filter-label">Think Tank Visits:</span>
+            <select class="filter-input" id="visitsFilter" onchange="AdvancedFilters.applyFilters()">
+                <option value="">Any</option>
+                <option value="0">0 visits</option>
+                <option value="1-2">1-2 visits</option>
+                <option value="3+">3+ visits</option>
+            </select>
+            
+            <span class="filter-label">Stress Level:</span>
+            <select class="filter-input" id="stressFilter" onchange="AdvancedFilters.applyFilters()">
+                <option value="">Any</option>
+                <option value="low">Low (1-4)</option>
+                <option value="medium">Medium (5-7)</option>
+                <option value="high">High (8-10)</option>
+            </select>
+        </div>
+        
+        <div class="filter-row">
+            <button class="filter-button filter-inactive" onclick="AdvancedFilters.clearAll()">Clear All Filters</button>
+            <span id="filterResultCount" style="margin-left: auto; color: #7f8c8d;"></span>
+        </div>
     </div>
+
+    <!-- Add Student Button -->
+    <div style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
+        <button class="filter-button filter-active" onclick="StudentForm.open()">+ Add Student</button>
+    </div>
+
+    <!-- Student List -->
     <div class="student-list">
         <div class="section-title">Student Priority List</div>
         <div id="studentContainer"></div>
     </div>
 
-    <!-- Student Profile Modal - This is the popup that shows when you click on a student -->
-    <div id="studentProfileModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); z-index: 1000;">
-        <div style="position: relative; width: 80%; max-width: 900px; margin: 50px auto; background: white; border-radius: 15px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); max-height: 90vh; overflow-y: auto;">
-            <button onclick="closeStudentProfile()" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; cursor: pointer;">×</button>
-            <div id="studentProfileContent">
-                <!-- Student profile content will be injected here -->
-            </div>
+    <!-- Student Profile Modal -->
+    <div id="studentProfileModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="StudentProfile.close()">×</button>
+            <div id="studentProfileContent"></div>
         </div>
     </div>
-<!-- Student Form Modal (Add/Edit) -->
-<div id="studentFormModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); z-index: 1100;">
-    <div style="position: relative; width: 90%; max-width: 500px; margin: 80px auto; background: white; border-radius: 15px; padding: 30px;">
-        <button onclick="closeStudentForm()" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 24px; cursor: pointer;">×</button>
-        <h2 id="studentFormTitle" style="margin-bottom: 20px;">Add Student</h2>
-        <form id="studentForm" onsubmit="saveStudent(event)">
-            <input type="hidden" id="formStudentId">
-            <label>First Name:</label>
-            <input type="text" id="formFirstName" required style="width:100%;margin-bottom:10px;"><br>
-            <label>Last Name:</label>
-            <input type="text" id="formLastName" required style="width:100%;margin-bottom:10px;"><br>
-            <label>Grade (%):</label>
-            <input type="number" id="formGrade" min="0" max="100" required style="width:100%;margin-bottom:10px;"><br>
-            <label>ALEKS Days:</label>
-            <input type="number" id="formAleksDays" min="0" required style="width:100%;margin-bottom:10px;"><br>
-            <label>ALEKS Topics:</label>
-            <input type="number" id="formAleksTopics" min="0" required style="width:100%;margin-bottom:10px;"><br>
-            <label>Think Tank Visits:</label>
-            <input type="number" id="formThinkTankVisits" min="0" required style="width:100%;margin-bottom:10px;"><br>
-            <label>Stress (1-10):</label>
-            <input type="number" id="formStress" min="1" max="10" required style="width:100%;margin-bottom:10px;"><br>
-            <label>Confidence (1-10):</label>
-            <input type="number" id="formConfidence" min="1" max="10" required style="width:100%;margin-bottom:10px;"><br>
-            <label>Wellness (1-100):</label>
-            <input type="number" id="formWellness" min="1" max="100" required style="width:100%;margin-bottom:10px;"><br>
-            <button type="submit" class="filter-button filter-active" style="width:100%;margin-top:10px;">Save Student</button>
-        </form>
+
+    <!-- Student Form Modal -->
+    <div id="studentFormModal" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <button class="modal-close" onclick="StudentForm.close()">×</button>
+            <h2 id="studentFormTitle" style="margin-bottom: 20px;">Add Student</h2>
+            <form id="studentForm" onsubmit="StudentForm.save(event)">
+                <input type="hidden" id="formStudentId">
+                
+                <div class="form-group">
+                    <label for="formFirstName">First Name:</label>
+                    <input type="text" id="formFirstName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="formLastName">Last Name:</label>
+                    <input type="text" id="formLastName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="formGrade">Grade (%):</label>
+                    <input type="number" id="formGrade" min="0" max="100" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="formAleksDays">Days Since Last ALEKS Login:</label>
+                    <input type="number" id="formAleksDays" min="0" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="formAleksTopics">ALEKS Topics Completed:</label>
+                    <input type="number" id="formAleksTopics" min="0" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="formThinkTankVisits">Think Tank Visits This Month:</label>
+                    <input type="number" id="formThinkTankVisits" min="0" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="formStress">Stress Level (1-10):</label>
+                    <input type="number" id="formStress" min="1" max="10" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="formConfidence">Confidence Level (1-10):</label>
+                    <input type="number" id="formConfidence" min="1" max="10" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="formWellness">Wellness Score (1-100):</label>
+                    <input type="number" id="formWellness" min="1" max="100" required>
+                </div>
+                
+                <button type="submit" class="filter-button filter-active" style="width:100%;margin-top:10px;">Save Student</button>
+            </form>
+        </div>
     </div>
-</div>
+
     <div class="last-updated">
         Last updated: <span id="lastUpdated"></span>
     </div>
-        <script>
-        // Generate sample student data
-        const firstNames = ['Emma', 'Liam', 'Olivia', 'Noah', 'Ava', 'Ethan', 'Sophia', 'Mason', 'Isabella', 'William',
-                           'Mia', 'James', 'Charlotte', 'Benjamin', 'Amelia', 'Lucas', 'Harper', 'Henry', 'Evelyn', 'Alexander'];
-        const lastNames = ['Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez', 'Hernandez'];
 
-        // Survey response templates for generating realistic quotes
-        const surveyQuotes = {
-            stress: {
-                high: [
-                    "I feel overwhelmed with everything I have to do",
-                    "I'm having trouble sleeping because I worry about school",
-                    "The workload feels impossible to manage",
-                    "I panic when I think about upcoming exams",
-                    "I can't focus because I'm so anxious all the time",
-                    "Everything feels like it's piling up and I can't catch up",
-                    "I feel like I'm drowning in assignments",
-                    "The pressure is making it hard to eat or sleep normally"
-                ],
-                medium: [
-                    "Some days are harder than others to manage",
-                    "I feel stressed but I'm trying to cope",
-                    "School is challenging but I think I can handle it",
-                    "I worry sometimes but not constantly",
-                    "The workload is manageable most of the time",
-                    "I have stressful moments but they pass",
-                    "I feel pressure but I'm learning to deal with it"
-                ],
-                low: [
-                    "I feel pretty calm about school overall",
-                    "I'm managing my stress well this semester",
-                    "School feels challenging but not overwhelming",
-                    "I have good strategies for dealing with pressure",
-                    "I feel balanced and in control",
-                    "Even when things get busy, I stay pretty relaxed",
-                    "I'm confident in my ability to handle challenges"
-                ]
-            },
-            confidence: {
-                high: [
-                    "I believe I can succeed in my classes",
-                    "I feel prepared for the challenges ahead",
-                    "I trust my ability to learn new material",
-                    "I'm confident I can achieve my academic goals",
-                    "I feel capable of handling difficult coursework",
-                    "I believe in my potential to do well",
-                    "I feel ready to tackle whatever comes my way"
-                ],
-                medium: [
-                    "I think I can probably do well if I work hard",
-                    "Some subjects feel easier than others for me",
-                    "I have moments where I doubt myself but mostly feel okay",
-                    "I'm learning to believe in myself more",
-                    "My confidence varies depending on the subject",
-                    "I feel capable some days, uncertain others",
-                    "I'm working on building my self-confidence"
-                ],
-                low: [
-                    "I don't think I'm smart enough for college",
-                    "I worry I'm not cut out for this",
-                    "Everyone else seems to understand things better than me",
-                    "I feel like I'm falling behind everyone",
-                    "I don't think I belong here",
-                    "I'm afraid I'm going to fail",
-                    "I doubt my ability to succeed academically"
-                ]
+    <script>
+        // ===== DATA CONSTANTS =====
+        const CONFIG = {
+            SEMESTER_START: new Date('2025-06-02'),
+            SEMESTER_END: new Date('2025-08-08'),
+            CURRENT_DATE: new Date()
+        };
+
+        const SAMPLE_DATA = {
+            firstNames: ['Emma', 'Liam', 'Olivia', 'Noah', 'Ava', 'Ethan', 'Sophia', 'Mason', 'Isabella', 'William',
+                        'Mia', 'James', 'Charlotte', 'Benjamin', 'Amelia', 'Lucas', 'Harper', 'Henry', 'Evelyn', 'Alexander'],
+            lastNames: ['Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez', 'Hernandez'],
+            
+            surveyQuotes: {
+                stress: {
+                    high: [
+                        "I feel overwhelmed with everything I have to do",
+                        "I'm having trouble sleeping because I worry about school",
+                        "The workload feels impossible to manage",
+                        "I panic when I think about upcoming exams",
+                        "I can't focus because I'm so anxious all the time"
+                    ],
+                    medium: [
+                        "Some days are harder than others to manage",
+                        "I feel stressed but I'm trying to cope",
+                        "School is challenging but I think I can handle it",
+                        "The workload is manageable most of the time"
+                    ],
+                    low: [
+                        "I feel pretty calm about school overall",
+                        "I'm managing my stress well this semester",
+                        "School feels challenging but not overwhelming",
+                        "I have good strategies for dealing with pressure"
+                    ]
+                },
+                confidence: {
+                    high: [
+                        "I believe I can succeed in my classes",
+                        "I feel prepared for the challenges ahead",
+                        "I trust my ability to learn new material",
+                        "I'm confident I can achieve my academic goals"
+                    ],
+                    medium: [
+                        "I think I can probably do well if I work hard",
+                        "Some subjects feel easier than others for me",
+                        "My confidence varies depending on the subject"
+                    ],
+                    low: [
+                        "I don't think I'm smart enough for college",
+                        "I worry I'm not cut out for this",
+                        "Everyone else seems to understand things better than me",
+                        "I doubt my ability to succeed academically"
+                    ]
+                }
             }
         };
 
-        function generateStudentData() {
-            const students = [];
-            for (let i = 0; i < 50; i++) {
-                const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
-                const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
-                const studentType = Math.random() < 0.2 ? 'struggling' : Math.random() < 0.7 ? 'average' : 'excelling';
+        // ===== CORE DATA MANAGER =====
+        const DataManager = {
+            students: [],
+            charts: {},
+
+            generateCoachNotes() {
+                const topics = [
+                    "Discussed exam strategy",
+                    "Reviewed homework progress", 
+                    "Talked about stress management",
+                    "Set goals for ALEKS topics",
+                    "Addressed attendance concerns",
+                    "Career planning discussion",
+                    "Study group formation",
+                    "Time management strategies"
+                ];
+                const details = [
+                    "Student expressed some anxiety but is willing to try campus resources.",
+                    "Agreed to check in again before next major assignment.",
+                    "Coach recommended regular Think Tank visits.",
+                    "Student is confident about keeping up with coursework.",
+                    "Planned to join a study group.",
+                    "Discussed using campus tutoring services.",
+                    "Student committed to daily ALEKS practice.",
+                    "Explored stress reduction techniques together."
+                ];
                 
-                let grade, aleksDays, aleksTopics, thinkTankVisits, stress, confidence, wellness;
+                const notes = [];
+                const noteCount = 1 + Math.floor(Math.random() * 3);
+                for (let i = 0; i < noteCount; i++) {
+                    let daysAgo = Math.floor(Math.random() * 20);
+                    let date = new Date();
+                    date.setDate(date.getDate() - daysAgo);
+                    notes.push({
+                        date: date.toISOString(),
+                        summary: topics[Math.floor(Math.random() * topics.length)],
+                        details: details[Math.floor(Math.random() * details.length)]
+                    });
+                }
+                notes.sort((a, b) => new Date(b.date) - new Date(a.date));
+                return notes;
+            },
+
+            calculateComprehensiveSentiment(student) {
+                // Multi-factor sentiment analysis
+                let sentiment = 5; // Base neutral score
                 
-                if (studentType === 'struggling') {
-                    grade = 40 + Math.random() * 25;
-                    aleksDays = 5 + Math.floor(Math.random() * 10);
-                    aleksTopics = Math.floor(Math.random() * 15);
-                    thinkTankVisits = Math.floor(Math.random() * 3);
-                    stress = 7 + Math.floor(Math.random() * 4);
-                    confidence = 1 + Math.floor(Math.random() * 4);
-                    wellness = 20 + Math.random() * 40;
-                } else if (studentType === 'excelling') {
-                    grade = 85 + Math.random() * 13;
-                    aleksDays = Math.floor(Math.random() * 3);
-                    aleksTopics = 25 + Math.floor(Math.random() * 15);
-                    thinkTankVisits = 2 + Math.floor(Math.random() * 5);
-                    stress = 1 + Math.floor(Math.random() * 5);
-                    confidence = 7 + Math.floor(Math.random() * 4);
-                    wellness = 80 + Math.random() * 20;
+                // Academic performance impact (30% weight)
+                if (student.grade >= 85) sentiment += 1.5;
+                else if (student.grade >= 70) sentiment += 0.5;
+                else if (student.grade < 60) sentiment -= 2;
+                
+                // Engagement impact (25% weight)
+                if (student.aleksDays <= 2) sentiment += 1;
+                else if (student.aleksDays <= 5) sentiment += 0.5;
+                else sentiment -= 1.5;
+                
+                // Support utilization (20% weight)
+                if (student.thinkTankVisits >= 3) sentiment += 1;
+                else if (student.thinkTankVisits === 0) sentiment -= 1;
+                
+                // Stress/confidence impact (25% weight)
+                sentiment += (student.confidence - student.stress) * 0.3;
+                
+                return Math.max(1, Math.min(10, Math.round(sentiment * 10) / 10));
+            },
+
+            generateAttendanceData(studentType) {
+                const attendanceDates = [];
+                const attendanceData = [];
+                const today = new Date();
+                
+                for (let i = 0; i < 14; i++) {
+                    const date = new Date();
+                    date.setDate(today.getDate() - (13 - i));
+                    attendanceDates.push(date.toLocaleDateString('en-US', {month: 'short', day: 'numeric'}));
+                    
+                    // Attendance probability based on student type
+                    const attendanceRate = studentType === 'struggling' ? 0.6 : 
+                                         studentType === 'average' ? 0.8 : 0.95;
+                    attendanceData.push(Math.random() < attendanceRate ? 1 : 0);
+                }
+                return { dates: attendanceDates, data: attendanceData };
+            },
+
+            generateAleksActivity(studentType) {
+                const aleksDates = [];
+                const aleksData = [];
+                const today = new Date();
+                
+                for (let i = 0; i < 14; i++) {
+                    const date = new Date();
+                    date.setDate(today.getDate() - (13 - i));
+                    aleksDates.push(date.toLocaleDateString('en-US', {month: 'short', day: 'numeric'}));
+                    
+                    // Activity minutes based on student type
+                    const baseMinutes = studentType === 'struggling' ? 5 : 
+                                       studentType === 'average' ? 20 : 35;
+                    const variation = Math.floor(Math.random() * 20);
+                    aleksData.push(Math.max(0, baseMinutes + variation - 10));
+                }
+                return { dates: aleksDates, data: aleksData };
+            },
+
+            generateStudents() {
+                const students = [];
+                for (let i = 0; i < 50; i++) {
+                    const firstName = SAMPLE_DATA.firstNames[Math.floor(Math.random() * SAMPLE_DATA.firstNames.length)];
+                    const lastName = SAMPLE_DATA.lastNames[Math.floor(Math.random() * SAMPLE_DATA.lastNames.length)];
+                    const studentType = Math.random() < 0.2 ? 'struggling' : Math.random() < 0.7 ? 'average' : 'excelling';
+                    
+                    let grade, aleksDays, aleksTopics, thinkTankVisits, stress, confidence, wellness;
+                    
+                    if (studentType === 'struggling') {
+                        grade = 40 + Math.random() * 25;
+                        aleksDays = 5 + Math.floor(Math.random() * 10);
+                        aleksTopics = Math.floor(Math.random() * 15);
+                        thinkTankVisits = Math.floor(Math.random() * 3);
+                        stress = 7 + Math.floor(Math.random() * 4);
+                        confidence = 1 + Math.floor(Math.random() * 4);
+                        wellness = 20 + Math.random() * 40;
+                    } else if (studentType === 'excelling') {
+                        grade = 85 + Math.random() * 13;
+                        aleksDays = Math.floor(Math.random() * 3);
+                        aleksTopics = 25 + Math.floor(Math.random() * 15);
+                        thinkTankVisits = 2 + Math.floor(Math.random() * 5);
+                        stress = 1 + Math.floor(Math.random() * 5);
+                        confidence = 7 + Math.floor(Math.random() * 4);
+                        wellness = 80 + Math.random() * 20;
+                    } else {
+                        grade = 70 + Math.random() * 15;
+                        aleksDays = 1 + Math.floor(Math.random() * 4);
+                        aleksTopics = 15 + Math.floor(Math.random() * 10);
+                        thinkTankVisits = 1 + Math.floor(Math.random() * 4);
+                        stress = 3 + Math.floor(Math.random() * 5);
+                        confidence = 5 + Math.floor(Math.random() * 4);
+                        wellness = 60 + Math.random() * 20;
+                    }
+
+                    const status = wellness >= 80 ? 'green' : wellness >= 60 ? 'yellow' : 'red';
+                    const statusEmoji = status === 'green' ? '🟢' : status === 'yellow' ? '🟡' : '🔴';
+                    
+                    const stressLevel = stress >= 8 ? 'high' : stress >= 5 ? 'medium' : 'low';
+                    const confidenceLevel = confidence >= 8 ? 'high' : confidence >= 5 ? 'medium' : 'low';
+                    
+                    const stressQuote = SAMPLE_DATA.surveyQuotes.stress[stressLevel][Math.floor(Math.random() * SAMPLE_DATA.surveyQuotes.stress[stressLevel].length)];
+                    const confidenceQuote = SAMPLE_DATA.surveyQuotes.confidence[confidenceLevel][Math.floor(Math.random() * SAMPLE_DATA.surveyQuotes.confidence[confidenceLevel].length)];
+
+                    const student = {
+                        id: `UA${1000 + i}`,
+                        firstName,
+                        lastName,
+                        fullName: `${firstName} ${lastName}`,
+                        grade: Math.round(grade * 10) / 10,
+                        aleksDays: Math.floor(aleksDays),
+                        aleksTopics: Math.floor(aleksTopics),
+                        thinkTankVisits: Math.floor(thinkTankVisits),
+                        stress: Math.floor(stress),
+                        confidence: Math.floor(confidence),
+                        wellness: Math.round(wellness * 10) / 10,
+                        status,
+                        statusEmoji,
+                        type: studentType,
+                        stressQuote,
+                        confidenceQuote,
+                        coachNotes: this.generateCoachNotes(),
+                        attendanceData: this.generateAttendanceData(studentType),
+                        aleksActivityData: this.generateAleksActivity(studentType)
+                    };
+
+                    // Calculate comprehensive sentiment score
+                    student.sentimentScore = this.calculateComprehensiveSentiment(student);
+                    
+                    students.push(student);
+                }
+                
+                this.students = students.sort((a, b) => a.wellness - b.wellness);
+                return this.students;
+            },
+
+            getStudentById(id) {
+                return this.students.find(s => s.id === id);
+            },
+
+            addStudent(studentData) {
+                const newId = `UA${1000 + this.students.length + 1}`;
+                const student = {
+                    ...studentData,
+                    id: newId,
+                    fullName: `${studentData.firstName} ${studentData.lastName}`,
+                    status: studentData.wellness >= 80 ? 'green' : studentData.wellness >= 60 ? 'yellow' : 'red',
+                    statusEmoji: studentData.wellness >= 80 ? '🟢' : studentData.wellness >= 60 ? '🟡' : '🔴',
+                    type: (studentData.wellness < 60 || studentData.grade < 70) ? 'struggling' : studentData.wellness > 85 ? 'excelling' : 'average',
+                    coachNotes: this.generateCoachNotes(),
+                    attendanceData: this.generateAttendanceData(studentData.wellness < 60 ? 'struggling' : studentData.wellness > 85 ? 'excelling' : 'average'),
+                    aleksActivityData: this.generateAleksActivity(studentData.wellness < 60 ? 'struggling' : studentData.wellness > 85 ? 'excelling' : 'average')
+                };
+                
+                // Calculate comprehensive sentiment score
+                student.sentimentScore = this.calculateComprehensiveSentiment(student);
+                
+                this.students.push(student);
+                return student;
+            },
+
+            updateStudent(id, studentData) {
+                const index = this.students.findIndex(s => s.id === id);
+                if (index > -1) {
+                    const updatedStudent = {
+                        ...this.students[index],
+                        ...studentData,
+                        fullName: `${studentData.firstName} ${studentData.lastName}`,
+                        status: studentData.wellness >= 80 ? 'green' : studentData.wellness >= 60 ? 'yellow' : 'red',
+                        statusEmoji: studentData.wellness >= 80 ? '🟢' : studentData.wellness >= 60 ? '🟡' : '🔴',
+                        type: (studentData.wellness < 60 || studentData.grade < 70) ? 'struggling' : studentData.wellness > 85 ? 'excelling' : 'average'
+                    };
+                    
+                    // Recalculate comprehensive sentiment score
+                    updatedStudent.sentimentScore = this.calculateComprehensiveSentiment(updatedStudent);
+                    
+                    this.students[index] = updatedStudent;
+                    return this.students[index];
+                }
+                return null;
+            }
+        };
+
+        // ===== STATISTICS MANAGER =====
+        const StatsManager = {
+            update() {
+                const green = DataManager.students.filter(s => s.status === 'green').length;
+                const yellow = DataManager.students.filter(s => s.status === 'yellow').length;
+                const red = DataManager.students.filter(s => s.status === 'red').length;
+                
+                document.getElementById('greenCount').textContent = green;
+                document.getElementById('yellowCount').textContent = yellow;
+                document.getElementById('redCount').textContent = red;
+                document.getElementById('totalCount').textContent = DataManager.students.length;
+            }
+        };
+
+        // ===== CHART MANAGER =====
+        const ChartManager = {
+            cleanup() {
+                Object.values(DataManager.charts).forEach(chart => {
+                    if (chart && typeof chart.destroy === 'function') {
+                        chart.destroy();
+                    }
+                });
+                DataManager.charts = {};
+            },
+
+            createAll() {
+                this.cleanup();
+                this.createStatusChart();
+                this.createGradeChart();
+                this.createSentimentChart();
+                this.createAleksChart();
+                this.createThinkTankChart();
+            },
+
+            createStatusChart() {
+                const ctx = document.getElementById('statusChart').getContext('2d');
+                DataManager.charts.status = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Doing Well', 'Need Attention', 'Immediate Action'],
+                        datasets: [{
+                            data: [
+                                DataManager.students.filter(s => s.status === 'green').length,
+                                DataManager.students.filter(s => s.status === 'yellow').length,
+                                DataManager.students.filter(s => s.status === 'red').length
+                            ],
+                            backgroundColor: ['#27ae60', '#f39c12', '#e74c3c'],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { position: 'bottom' }
+                        }
+                    }
+                });
+            },
+
+            createGradeChart() {
+                const ctx = document.getElementById('gradeChart').getContext('2d');
+                const gradeBins = Array(10).fill(0);
+                DataManager.students.forEach(s => {
+                    const bin = Math.min(9, Math.floor(s.grade / 10));
+                    gradeBins[bin]++;
+                });
+
+                DataManager.charts.grade = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['0-10', '10-20', '20-30', '30-40', '40-50', '50-60', '60-70', '70-80', '80-90', '90-100'],
+                        datasets: [{
+                            label: 'Number of Students',
+                            data: gradeBins,
+                            backgroundColor: '#3498db',
+                            borderRadius: 5
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { beginAtZero: true } }
+                    }
+                });
+            },
+
+            createSentimentChart() {
+                const ctx = document.getElementById('sentimentChart').getContext('2d');
+                const sentimentBins = Array(10).fill(0);
+                DataManager.students.forEach(s => {
+                    const bin = Math.min(9, Math.floor(s.sentimentScore));
+                    sentimentBins[bin]++;
+                });
+
+                DataManager.charts.sentiment = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['1-2', '2-3', '3-4', '4-5', '5-6', '6-7', '7-8', '8-9', '9-10', '10'],
+                        datasets: [{
+                            label: 'Number of Students',
+                            data: sentimentBins,
+                            backgroundColor: [
+                                '#e74c3c', '#e67e22', '#f39c12', '#f1c40f', '#ffeb3b',
+                                '#cddc39', '#8bc34a', '#4caf50', '#2ecc71', '#27ae60'
+                            ],
+                            borderRadius: 5
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            x: { title: { display: true, text: 'Sentiment Score (1=Very Negative, 10=Very Positive)' } },
+                            y: { beginAtZero: true, title: { display: true, text: 'Number of Students' } }
+                        }
+                    }
+                });
+            },
+
+            createAleksChart() {
+                const ctx = document.getElementById('aleksChart').getContext('2d');
+                DataManager.charts.aleks = new Chart(ctx, {
+                    type: 'scatter',
+                    data: {
+                        datasets: [{
+                            label: 'Students',
+                            data: DataManager.students.map(s => ({
+                                x: s.aleksDays,
+                                y: s.aleksTopics
+                            })),
+                            backgroundColor: DataManager.students.map(s => 
+                                s.status === 'green' ? '#27ae60' : s.status === 'yellow' ? '#f39c12' : '#e74c3c'
+                            )
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            x: { title: { display: true, text: 'Days Since Last ALEKS Login' } },
+                            y: { title: { display: true, text: 'ALEKS Topics Completed' } }
+                        }
+                    }
+                });
+            },
+
+            createThinkTankChart() {
+                const ctx = document.getElementById('thinkTankChart').getContext('2d');
+                const thinkTankData = {
+                    'Doing Well': this.getAverageVisits('green'),
+                    'Need Attention': this.getAverageVisits('yellow'),
+                    'Immediate Action': this.getAverageVisits('red')
+                };
+
+                DataManager.charts.thinkTank = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: Object.keys(thinkTankData),
+                        datasets: [{
+                            label: 'Average Visits per Month',
+                            data: Object.values(thinkTankData),
+                            backgroundColor: ['#27ae60', '#f39c12', '#e74c3c'],
+                            borderRadius: 5
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { beginAtZero: true, title: { display: true, text: 'Average Visits' } }
+                        }
+                    }
+                });
+            },
+
+            getAverageVisits(status) {
+                const students = DataManager.students.filter(s => s.status === status);
+                if (students.length === 0) return 0;
+                return students.reduce((sum, s) => sum + s.thinkTankVisits, 0) / students.length;
+            }
+        };
+
+        // ===== STUDENT MANAGER =====
+        const StudentManager = {
+            currentFilter: 'all',
+            currentView: 'list',
+            currentSort: 'wellness', // Default to wellness sorting
+            advancedFilters: {},
+            filteredStudents: [],
+
+            filter(status, buttonElement) {
+                this.currentFilter = status;
+                this.display();
+                this.updateFilterButtons(buttonElement);
+            },
+
+            setSortOrder(sortType) {
+                this.currentSort = sortType;
+                this.display();
+                this.updateSortButtons();
+            },
+
+            toggleView(view) {
+                this.currentView = view;
+                this.display();
+                this.updateViewButtons();
+            },
+
+            applyAdvancedFilters(filters) {
+                this.advancedFilters = filters;
+                this.display();
+            },
+
+            clearAdvancedFilters() {
+                this.advancedFilters = {};
+                this.display();
+            },
+
+            getFilteredStudents() {
+                let students = DataManager.students;
+                
+                // Apply status filter
+                if (this.currentFilter !== 'all') {
+                    students = students.filter(s => s.status === this.currentFilter);
+                }
+                
+                // Apply advanced filters
+                if (Object.keys(this.advancedFilters).length > 0) {
+                    students = students.filter(s => AdvancedFilters.matchesFilters(s, this.advancedFilters));
+                }
+
+                // Apply sorting
+                if (this.currentSort === 'alphabetical') {
+                    students = students.sort((a, b) => a.fullName.localeCompare(b.fullName));
                 } else {
-                    grade = 70 + Math.random() * 15;
-                    aleksDays = 1 + Math.floor(Math.random() * 4);
-                    aleksTopics = 15 + Math.floor(Math.random() * 10);
-                    thinkTankVisits = 1 + Math.floor(Math.random() * 4);
-                    stress = 3 + Math.floor(Math.random() * 5);
-                    confidence = 5 + Math.floor(Math.random() * 4);
-                    wellness = 60 + Math.random() * 20;
+                    // Default wellness sorting (low to high, prioritizing red status students)
+                    students = students.sort((a, b) => a.wellness - b.wellness);
                 }
-
-                const status = wellness >= 80 ? 'green' : wellness >= 60 ? 'yellow' : 'red';
-                const statusEmoji = status === 'green' ? '🟢' : status === 'yellow' ? '🟡' : '🔴';
-
-                // Generate sentiment score based on stress and confidence
-                const sentimentScore = Math.max(1, Math.min(10, (11 - stress + confidence) / 2));
-
-                // Generate survey quotes
-                const stressLevel = stress >= 8 ? 'high' : stress >= 5 ? 'medium' : 'low';
-                const confidenceLevel = confidence >= 8 ? 'high' : confidence >= 5 ? 'medium' : 'low';
                 
-                const stressQuote = surveyQuotes.stress[stressLevel][Math.floor(Math.random() * surveyQuotes.stress[stressLevel].length)];
-                const confidenceQuote = surveyQuotes.confidence[confidenceLevel][Math.floor(Math.random() * surveyQuotes.confidence[confidenceLevel].length)];
+                this.filteredStudents = students;
+                return students;
+            },
 
-                students.push({
-                    id: `UA${1000 + i}`,
-                    firstName,
-                    lastName,
-                    fullName: `${firstName} ${lastName}`,
-                    grade: Math.round(grade * 10) / 10,
-                    aleksDays: Math.floor(aleksDays),
-                    aleksTopics: Math.floor(aleksTopics),
-                    thinkTankVisits: Math.floor(thinkTankVisits),
-                    stress: Math.floor(stress),
-                    confidence: Math.floor(confidence),
-                    wellness: Math.round(wellness * 10) / 10,
-                    status,
-                    statusEmoji,
-                    type: studentType,
-                    sentimentScore: Math.round(sentimentScore * 10) / 10,
-                    stressQuote,
-                    confidenceQuote
-                });
-            }
-            return students.sort((a, b) => a.wellness - b.wellness);
-        }
+            getFilteredCount() {
+                return this.getFilteredStudents().length;
+            },
 
-        const students = generateStudentData();
-        let currentFilter = 'all';
-        let currentView = 'list'; // Default view is list
+            display() {
+                const container = document.getElementById('studentContainer');
+                const filteredStudents = this.getFilteredStudents();
 
-        // Update statistics
-        function updateStats() {
-            const green = students.filter(s => s.status === 'green').length;
-            const yellow = students.filter(s => s.status === 'yellow').length;
-            const red = students.filter(s => s.status === 'red').length;
-            
-            document.getElementById('greenCount').textContent = green;
-            document.getElementById('yellowCount').textContent = yellow;
-            document.getElementById('redCount').textContent = red;
-            document.getElementById('totalCount').textContent = students.length;
-        }
-                    // Create charts
-        function createCharts() {
-            // Status pie chart
-            const statusCtx = document.getElementById('statusChart').getContext('2d');
-            new Chart(statusCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Doing Well', 'Need Attention', 'Immediate Action'],
-                    datasets: [{
-                        data: [
-                            students.filter(s => s.status === 'green').length,
-                            students.filter(s => s.status === 'yellow').length,
-                            students.filter(s => s.status === 'red').length
-                        ],
-                        backgroundColor: ['#27ae60', '#f39c12', '#e74c3c'],
-                        borderWidth: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'bottom'
-                        }
-                    }
-                }
-            });
-
-            // Grade histogram
-            const gradeCtx = document.getElementById('gradeChart').getContext('2d');
-            const gradeBins = Array(10).fill(0);
-            students.forEach(s => {
-                const bin = Math.min(9, Math.floor(s.grade / 10));
-                gradeBins[bin]++;
-            });
-
-            new Chart(gradeCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['0-10', '10-20', '20-30', '30-40', '40-50', '50-60', '60-70', '70-80', '80-90', '90-100'],
-                    datasets: [{
-                        label: 'Number of Students',
-                        data: gradeBins,
-                        backgroundColor: '#3498db',
-                        borderRadius: 5
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-
-            // Survey Sentiment Analysis Chart
-            const sentimentCtx = document.getElementById('sentimentChart').getContext('2d');
-            const sentimentBins = Array(10).fill(0);
-            students.forEach(s => {
-                const bin = Math.min(9, Math.floor(s.sentimentScore));
-                sentimentBins[bin]++;
-            });
-
-            new Chart(sentimentCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['1-2', '2-3', '3-4', '4-5', '5-6', '6-7', '7-8', '8-9', '9-10', '10'],
-                    datasets: [{
-                        label: 'Number of Students',
-                        data: sentimentBins,
-                        backgroundColor: [
-                            '#e74c3c', '#e67e22', '#f39c12', '#f1c40f', '#ffeb3b',
-                            '#cddc39', '#8bc34a', '#4caf50', '#2ecc71', '#27ae60'
-                        ],
-                        borderRadius: 5
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    },
-                    scales: {
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Sentiment Score (1=Very Negative, 10=Very Positive)'
-                            }
-                        },
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Number of Students'
-                            }
-                        }
-                    }
-                }
-            });
-
-            // ALEKS scatter plot
-            const aleksCtx = document.getElementById('aleksChart').getContext('2d');
-            new Chart(aleksCtx, {
-                type: 'scatter',
-                data: {
-                    datasets: [{
-                        label: 'Students',
-                        data: students.map(s => ({
-                            x: s.aleksDays,
-                            y: s.aleksTopics,
-                            backgroundColor: s.status === 'green' ? '#27ae60' : s.status === 'yellow' ? '#f39c12' : '#e74c3c'
-                        })),
-                        backgroundColor: students.map(s => s.status === 'green' ? '#27ae60' : s.status === 'yellow' ? '#f39c12' : '#e74c3c')
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    },
-                    scales: {
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Days Since Last ALEKS Login'
-                            }
-                        },
-                        y: {
-                            title: {
-                                display: true,
-                                text: 'ALEKS Topics Completed'
-                            }
-                        }
-                    }
-                }
-            });
-
-            // Think Tank utilization
-            const thinkTankCtx = document.getElementById('thinkTankChart').getContext('2d');
-            const thinkTankData = {
-                'Doing Well': students.filter(s => s.status === 'green').reduce((sum, s) => sum + s.thinkTankVisits, 0) / students.filter(s => s.status === 'green').length || 0,
-                'Need Attention': students.filter(s => s.status === 'yellow').reduce((sum, s) => sum + s.thinkTankVisits, 0) / students.filter(s => s.status === 'yellow').length || 0,
-                'Immediate Action': students.filter(s => s.status === 'red').reduce((sum, s) => sum + s.thinkTankVisits, 0) / students.filter(s => s.status === 'red').length || 0
-            };
-
-            new Chart(thinkTankCtx, {
-                type: 'bar',
-                data: {
-                    labels: Object.keys(thinkTankData),
-                    datasets: [{
-                        label: 'Average Visits per Month',
-                        data: Object.values(thinkTankData),
-                        backgroundColor: ['#27ae60', '#f39c12', '#e74c3c'],
-                        borderRadius: 5
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Average Visits'
-                            }
-                        }
-                    }
-                }
-            });
-        }
-                    // Display students
-                    function displayStudents(filter = 'all') {
-    const container = document.getElementById('studentContainer');
-    const filteredStudents = filter === 'all' ? students : students.filter(s => s.status === filter);
-
-    if (currentView === 'list') {
-        // List view
-        container.innerHTML = filteredStudents.map(student => {
-            const concerns = [];
-            if (student.grade < 70) concerns.push(`Grade: ${student.grade}%`);
-            if (student.aleksDays > 3) concerns.push(`${student.aleksDays} days since ALEKS`);
-            if (student.stress > 7) concerns.push('High stress');
-            if (student.confidence < 5) concerns.push('Low confidence');
-            if (student.thinkTankVisits === 0) concerns.push('No Think Tank visits');
-            return `
-                <div class="student-item student-${student.status}" onclick="showStudentProfile('${student.id}')">
-                    <div class="student-status">${student.statusEmoji}</div>
-                    <div class="student-info">
-                        <div class="student-name">${student.fullName}</div>
-                        <div class="student-details">
-                            ${concerns.length > 0 ? concerns.join(' • ') : 'All indicators positive'}
-                        </div>
-                    </div>
-                    <div class="student-score" style="color: ${student.status === 'green' ? '#27ae60' : student.status === 'yellow' ? '#f39c12' : '#e74c3c'}">
-                        ${student.wellness}
-                    </div>
-                </div>
-            `;
-        }).join('');
-    } else {
-        // Grid view
-        container.innerHTML = `
-            <div class="student-grid">
-                ${filteredStudents.map(student => `
-                    <div class="student-card student-${student.status}" onclick="showStudentProfile('${student.id}')">
-                        <div class="student-status" style="font-size:2em;">${student.statusEmoji}</div>
-                        <div class="student-name" style="margin: 8px 0 4px 0; font-weight:bold;">${student.fullName}</div>
-                        <div style="color:#7f8c8d; font-size:0.95em; margin-bottom:6px;">${student.grade}% • ${student.wellness}/100</div>
-                        <div class="student-score" style="font-size:1.3em; color:${student.status === 'green' ? '#27ae60' : student.status === 'yellow' ? '#f39c12' : '#e74c3c'}">${student.type.charAt(0).toUpperCase() + student.type.slice(1)}</div>
-                    </div>
-                `).join('')}
-            </div>
-        `;
-    }
-}
-
-        // Filter functionality
-        function filterStudents(filter) {
-            currentFilter = filter;
-            displayStudents(filter);
-            
-            // Update button states
-            document.querySelectorAll('.filter-button').forEach(btn => {
-                btn.classList.remove('filter-active');
-                btn.classList.add('filter-inactive');
-            });
-            event.target.classList.remove('filter-inactive');
-            event.target.classList.add('filter-active');
-        }
-                    // Show student profile when clicked
-        function showStudentProfile(studentId) {
-            const student = students.find(s => s.id === studentId);
-            if (!student) return;
-            
-            // Generate attendance data
-            const attendanceDates = [];
-            const attendanceData = [];
-            const today = new Date();
-            for (let i = 0; i < 14; i++) {
-                const date = new Date();
-                date.setDate(today.getDate() - (13 - i));
-                attendanceDates.push(date.toLocaleDateString('en-US', {month: 'short', day: 'numeric'}));
-                // For simplicity, generate random attendance but weight based on student type
-                const attended = student.type === 'struggling' ? Math.random() > 0.4 : 
-                                student.type === 'average' ? Math.random() > 0.2 : 
-                                Math.random() > 0.1;
-                attendanceData.push(attended ? 1 : 0);
-            }
-            
-            // Generate ALEKS activity data
-            const aleksDates = [];
-            const aleksData = [];
-            for (let i = 0; i < 14; i++) {
-                const date = new Date();
-                date.setDate(today.getDate() - (13 - i));
-                aleksDates.push(date.toLocaleDateString('en-US', {month: 'short', day: 'numeric'}));
-                // Minutes spent on ALEKS each day
-                const minutes = student.type === 'struggling' ? Math.floor(Math.random() * 20) : 
-                               student.type === 'average' ? 10 + Math.floor(Math.random() * 30) : 
-                               20 + Math.floor(Math.random() * 50);
-                aleksData.push(minutes);
-            }
-            
-            // Generate outreach history
-            const outreachHistory = [];
-            const outreachTypes = ['Email', 'Text', 'Phone Call', 'In-person Meeting'];
-            const outreachCount = 1 + Math.floor(Math.random() * 5); // 1-5 outreach attempts
-            
-            for (let i = 0; i < outreachCount; i++) {
-                const daysAgo = Math.floor(Math.random() * 21); // 0-20 days ago
-                const date = new Date();
-                date.setDate(today.getDate() - daysAgo);
-                
-                outreachHistory.push({
-                    type: outreachTypes[Math.floor(Math.random() * outreachTypes.length)],
-                    date: date.toLocaleDateString('en-US', {month: 'short', day: 'numeric'}),
-                    notes: `Discussed ${['progress', 'challenges', 'resources', 'goals'][Math.floor(Math.random() * 4)]}`
-                });
-            }
-            
-            // Sort outreach history by most recent first
-            outreachHistory.sort((a, b) => new Date(b.date) - new Date(a.date));
-            
-            const content = `
-                <h2 style="color: #2c3e50; margin-bottom: 20px;">${student.fullName} - Detailed Profile</h2>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px;">
-                    <div style="background: #f8f9fa; padding: 15px; border-radius: 10px;">
-                        <h4 style="color: #2c3e50; margin-bottom: 10px;">Academic Performance</h4>
-                        <p><strong>Current Grade:</strong> ${student.grade}%</p>
-                        <p><strong>ALEKS Topics:</strong> ${student.aleksTopics} completed</p>
-                        <p><strong>Last ALEKS Login:</strong> ${student.aleksDays} days ago</p>
-                    </div>
-                    
-                    <div style="background: #f8f9fa; padding: 15px; border-radius: 10px;">
-                        <h4 style="color: #2c3e50; margin-bottom: 10px;">Support Utilization</h4>
-                        <p><strong>Think Tank Visits:</strong> ${student.thinkTankVisits} this month</p>
-                        <p><strong>Overall Wellness:</strong> ${student.wellness}/100</p>
-                        <p><strong>Status:</strong> <span style="color: ${student.status === 'green' ? '#27ae60' : student.status === 'yellow' ? '#f39c12' : '#e74c3c'}">${student.statusEmoji} ${student.status.charAt(0).toUpperCase() + student.status.slice(1)}</span></p>
-                    </div>
-                    
-                    <div style="background: #f8f9fa; padding: 15px; border-radius: 10px;">
-                        <h4 style="color: #2c3e50; margin-bottom: 10px;">Survey Insights</h4>
-                        <p><strong>Overall Sentiment:</strong> ${student.sentimentScore}/10</p>
-                        <p><strong>Stress Level:</strong> ${student.stress}/10</p>
-                        <p><strong>Confidence Level:</strong> ${student.confidence}/10</p>
-                    </div>
-                </div>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 30px;">
-                    <div>
-                        <h4 style="color: #2c3e50; margin-bottom: 15px;">Recent Survey Responses</h4>
-                        <div style="background: #fff3cd; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid #ffc107;">
-                            <h5 style="color: #856404; margin-bottom: 8px;">About Stress (${student.stress}/10):</h5>
-                            <p style="font-style: italic; color: #6c757d; margin: 0;">"${student.stressQuote}"</p>
-                        </div>
-                        <div style="background: #d1ecf1; padding: 15px; border-radius: 10px; border-left: 4px solid #17a2b8;">
-                            <h5 style="color: #0c5460; margin-bottom: 8px;">About Confidence (${student.confidence}/10):</h5>
-                            <p style="font-style: italic; color: #6c757d; margin: 0;">"${student.confidenceQuote}"</p>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <h4 style="color: #2c3e50; margin-bottom: 15px;">Outreach History</h4>
-                        <div style="max-height: 200px; overflow-y: auto;">
-                            ${outreachHistory.map(contact => `
-                                <div style="background: #f8f9fa; padding: 10px; margin-bottom: 10px; border-radius: 8px; border-left: 3px solid #007bff;">
-                                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                                        <strong style="color: #495057;">${contact.type}</strong>
-                                        <span style="color: #6c757d; font-size: 0.9em;">${contact.date}</span>
+                if (this.currentView === 'list') {
+                    container.innerHTML = filteredStudents.map(student => {
+                        const concerns = this.getConcerns(student);
+                        return `
+                            <div class="student-item student-${student.status}" onclick="StudentProfile.show('${student.id}')">
+                                <div class="student-status">${student.statusEmoji}</div>
+                                <div class="student-info">
+                                    <div class="student-name">${student.fullName}</div>
+                                    <div class="student-details">
+                                        ${concerns.length > 0 ? concerns.join(' • ') : 'All indicators positive'}
                                     </div>
-                                    <p style="margin: 5px 0 0 0; color: #6c757d; font-size: 0.9em;">${contact.notes}</p>
+                                </div>
+                                <div class="student-score" style="color: ${this.getStatusColor(student.status)}">
+                                    ${student.wellness}
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                } else {
+                    container.innerHTML = `
+                        <div class="student-grid">
+                            ${filteredStudents.map(student => `
+                                <div class="student-card student-${student.status}" onclick="StudentProfile.show('${student.id}')">
+                                    <div class="student-status" style="font-size:2em;">${student.statusEmoji}</div>
+                                    <div class="student-name" style="margin: 8px 0 4px 0; font-weight:bold;">${student.fullName}</div>
+                                    <div style="color:#7f8c8d; font-size:0.95em; margin-bottom:6px;">${student.grade}% • ${student.wellness}/100</div>
+                                    <div class="student-score" style="font-size:1.3em; color:${this.getStatusColor(student.status)}">${student.type.charAt(0).toUpperCase() + student.type.slice(1)}</div>
                                 </div>
                             `).join('')}
                         </div>
-                    </div>
-                </div>
-                
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
-                    <div>
-                        <h4 style="color: #2c3e50; margin-bottom: 15px;">Class Attendance (Last 2 Weeks)</h4>
-                        <canvas id="attendanceChart" style="max-height: 200px;"></canvas>
-                    </div>
-                    <div>
-                        <h4 style="color: #2c3e50; margin-bottom: 15px;">ALEKS Activity (Minutes/Day)</h4>
-                        <canvas id="aleksActivityChart" style="max-height: 200px;"></canvas>
-                    </div>
-                </div>
-                
-                <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
-                    <button onclick="openStudentForm('${student.id}')" style="background: #27ae60; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Edit Student</button>
-<button onclick="logOutreach('${student.id}')" style="background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Log New Contact</button>
-<button onclick="closeStudentProfile()" style="background: #6c757d; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Close</button>
-                </div>
-            `;
-            
-            document.getElementById('studentProfileContent').innerHTML = content;
-            document.getElementById('studentProfileModal').style.display = 'block';
-            
-            // Create attendance chart
-            setTimeout(() => {
-                const attendanceCtx = document.getElementById('attendanceChart');
-                if (attendanceCtx) {
-                    new Chart(attendanceCtx.getContext('2d'), {
-                        type: 'bar',
-                        data: {
-                            labels: attendanceDates,
-                            datasets: [{
-                                label: 'Attended',
-                                data: attendanceData,
-                                backgroundColor: attendanceData.map(val => val === 1 ? '#27ae60' : '#e74c3c'),
-                                borderRadius: 3
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            plugins: {
-                                legend: { display: false }
-                            },
-                            scales: {
-                                y: {
-                                    beginAtZero: true,
-                                    max: 1,
-                                    ticks: {
-                                        callback: function(value) {
-                                            return value === 1 ? 'Present' : 'Absent';
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    });
+                    `;
                 }
-                
-                // Create ALEKS activity chart
-                const aleksActivityCtx = document.getElementById('aleksActivityChart');
-                if (aleksActivityCtx) {
-                    new Chart(aleksActivityCtx.getContext('2d'), {
-                        type: 'line',
-                        data: {
-                            labels: aleksDates,
-                            datasets: [{
-                                label: 'Minutes',
-                                data: aleksData,
-                                borderColor: '#3498db',
-                                backgroundColor: 'rgba(52, 152, 219, 0.1)',
-                                fill: true,
-                                tension: 0.4
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            plugins: {
-                                legend: { display: false }
-                            },
-                            scales: {
-                                y: {
-                                    beginAtZero: true,
-                                    title: {
-                                        display: true,
-                                        text: 'Minutes'
-                                    }
-                                }
-                            }
-                        }
-                    });
+
+                // Update filter result count if advanced filters are active
+                if (Object.keys(this.advancedFilters).length > 0) {
+                    AdvancedFilters.updateResultCount();
                 }
-            }, 100);
-        }
+            },
 
-        // Close student profile modal
-        function closeStudentProfile() {
-            document.getElementById('studentProfileModal').style.display = 'none';
-        }
+            getConcerns(student) {
+                const concerns = [];
+                if (student.grade < 70) concerns.push(`Grade: ${student.grade}%`);
+                if (student.aleksDays > 3) concerns.push(`${student.aleksDays} days since ALEKS`);
+                if (student.stress > 7) concerns.push('High stress');
+                if (student.confidence < 5) concerns.push('Low confidence');
+                if (student.thinkTankVisits === 0) concerns.push('No Think Tank visits');
+                return concerns;
+            },
 
-        // Log new outreach contact
-        function logOutreach(studentId) {
-            const student = students.find(s => s.id === studentId);
-            if (!student) return;
-            
-            const contactType = prompt('Contact type (Email/Text/Phone Call/In-person Meeting):');
-            const notes = prompt('Notes about the contact:');
-            
-            if (contactType && notes) {
-                alert(`Outreach logged for ${student.fullName}:\nType: ${contactType}\nNotes: ${notes}`);
-                // In a real implementation, this would save to a database
+            getStatusColor(status) {
+                return status === 'green' ? '#27ae60' : status === 'yellow' ? '#f39c12' : '#e74c3c';
+            },
+
+            updateFilterButtons(activeButton) {
+                document.querySelectorAll('.filters .filter-button').forEach(btn => {
+                    if (btn !== activeButton && !btn.id.includes('ViewBtn') && !btn.id.includes('sortBtn') && !btn.textContent.includes('Advanced')) {
+                        btn.classList.remove('filter-active');
+                        btn.classList.add('filter-inactive');
+                    }
+                });
+                activeButton.classList.remove('filter-inactive');
+                activeButton.classList.add('filter-active');
+            },
+
+            updateSortButtons() {
+                const wellnessBtn = document.getElementById('sortWellnessBtn');
+                const alphaBtn = document.getElementById('sortAlphaBtn');
+                
+                wellnessBtn.classList.remove('filter-active', 'filter-inactive');
+                alphaBtn.classList.remove('filter-active', 'filter-inactive');
+                
+                if (this.currentSort === 'wellness') {
+                    wellnessBtn.classList.add('filter-active');
+                    alphaBtn.classList.add('filter-inactive');
+                } else {
+                    wellnessBtn.classList.add('filter-inactive');
+                    alphaBtn.classList.add('filter-active');
+                }
+            },
+
+            updateViewButtons() {
+                const listBtn = document.getElementById('listViewBtn');
+                const gridBtn = document.getElementById('gridViewBtn');
+                
+                listBtn.classList.remove('filter-active', 'filter-inactive');
+                gridBtn.classList.remove('filter-active', 'filter-inactive');
+                
+                if (this.currentView === 'list') {
+                    listBtn.classList.add('filter-active');
+                    gridBtn.classList.add('filter-inactive');
+                } else {
+                    listBtn.classList.add('filter-inactive');
+                    gridBtn.classList.add('filter-active');
+                }
             }
-        }
-        function toggleView(view) {
-    currentView = view;
-    displayStudents(currentFilter);
+        };
 
-    // Update button styles
-    document.getElementById('listViewBtn').classList.remove('filter-active');
-    document.getElementById('listViewBtn').classList.add('filter-inactive');
-    document.getElementById('gridViewBtn').classList.remove('filter-active');
-    document.getElementById('gridViewBtn').classList.add('filter-inactive');
+        // ===== STUDENT PROFILE MANAGER =====
+        const StudentProfile = {
+            show(studentId) {
+                const student = DataManager.getStudentById(studentId);
+                if (!student) {
+                    console.error(`Student ${studentId} not found`);
+                    return;
+                }
+                
+                const content = `
+                    ${this.generateBriefing(student)}
+                    
+                    <h2 style="color: #2c3e50; margin-bottom: 20px;">${student.fullName} - Detailed Profile</h2>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px;">
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 10px;">
+                            <h4 style="color: #2c3e50; margin-bottom: 10px;">Academic Performance</h4>
+                            <p><strong>Current Grade:</strong> ${student.grade}%</p>
+                            <p><strong>ALEKS Topics:</strong> ${student.aleksTopics} completed</p>
+                            <p><strong>Last ALEKS Login:</strong> ${student.aleksDays} days ago</p>
+                        </div>
+                        
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 10px;">
+                            <h4 style="color: #2c3e50; margin-bottom: 10px;">Support Utilization</h4>
+                            <p><strong>Think Tank Visits:</strong> ${student.thinkTankVisits} this month</p>
+                            <p><strong>Overall Wellness:</strong> ${student.wellness}/100</p>
+                            <p><strong>Status:</strong> <span style="color: ${StudentManager.getStatusColor(student.status)}">${student.statusEmoji} ${student.status.charAt(0).toUpperCase() + student.status.slice(1)}</span></p>
+                        </div>
+                        
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 10px;">
+                            <h4 style="color: #2c3e50; margin-bottom: 10px;">Comprehensive Analysis</h4>
+                            <p><strong>Sentiment Score:</strong> ${student.sentimentScore}/10</p>
+                            <p><strong>Stress Level:</strong> ${student.stress}/10</p>
+                            <p><strong>Confidence Level:</strong> ${student.confidence}/10</p>
+                        </div>
+                    </div>
 
-    if(view === 'list') {
-        document.getElementById('listViewBtn').classList.add('filter-active');
-        document.getElementById('listViewBtn').classList.remove('filter-inactive');
-    } else {
-        document.getElementById('gridViewBtn').classList.add('filter-active');
-        document.getElementById('gridViewBtn').classList.remove('filter-inactive');
-    }
-}
-// Open Student Form (for Add or Edit)
-function openStudentForm(studentId = null) {
-    const form = document.getElementById('studentForm');
-    const title = document.getElementById('studentFormTitle');
-    form.reset();
+                    <div style="margin-bottom: 30px;">
+                        <h3 style="color: #2c3e50; margin-bottom: 15px;">Coach's Notes</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            ${this.renderCoachNotes(student.coachNotes)}
+                        </ul>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
+                        <div>
+                            <h4 style="color: #2c3e50; margin-bottom: 15px;">Class Attendance (Last 2 Weeks)</h4>
+                            <canvas id="attendanceChart" style="max-height: 200px;"></canvas>
+                        </div>
+                        <div>
+                            <h4 style="color: #2c3e50; margin-bottom: 15px;">ALEKS Activity (Minutes/Day)</h4>
+                            <canvas id="aleksActivityChart" style="max-height: 200px;"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 30px;">
+                        <div>
+                            <h4 style="color: #2c3e50; margin-bottom: 15px;">Recent Survey Responses</h4>
+                            <div style="background: #fff3cd; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid #ffc107;">
+                                <h5 style="color: #856404; margin-bottom: 8px;">About Stress (${student.stress}/10):</h5>
+                                <p style="font-style: italic; color: #6c757d; margin: 0;">"${student.stressQuote}"</p>
+                            </div>
+                            <div style="background: #d1ecf1; padding: 15px; border-radius: 10px; border-left: 4px solid #17a2b8;">
+                                <h5 style="color: #0c5460; margin-bottom: 8px;">About Confidence (${student.confidence}/10):</h5>
+                                <p style="font-style: italic; color: #6c757d; margin: 0;">"${student.confidenceQuote}"</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
+                        <button onclick="StudentForm.open('${student.id}')" style="background: #27ae60; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Edit Student</button>
+                        <button onclick="StudentProfile.logOutreach('${student.id}')" style="background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Log New Contact</button>
+                        <button onclick="StudentProfile.close()" style="background: #6c757d; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Close</button>
+                    </div>
+                `;
+                
+                document.getElementById('studentProfileContent').innerHTML = content;
+                document.getElementById('studentProfileModal').style.display = 'block';
+                
+                // Create charts after DOM is updated
+                setTimeout(() => {
+                    this.createAttendanceChart(student);
+                    this.createAleksActivityChart(student);
+                }, 100);
+            },
 
-    if (studentId) {
-        // Editing existing student
-        const student = students.find(s => s.id === studentId);
-        if (!student) return;
-        title.textContent = "Edit Student";
-        document.getElementById('formStudentId').value = student.id;
-        document.getElementById('formFirstName').value = student.firstName;
-        document.getElementById('formLastName').value = student.lastName;
-        document.getElementById('formGrade').value = student.grade;
-        document.getElementById('formAleksDays').value = student.aleksDays;
-        document.getElementById('formAleksTopics').value = student.aleksTopics;
-        document.getElementById('formThinkTankVisits').value = student.thinkTankVisits;
-        document.getElementById('formStress').value = student.stress;
-        document.getElementById('formConfidence').value = student.confidence;
-        document.getElementById('formWellness').value = student.wellness;
-    } else {
-        // Adding new student
-        title.textContent = "Add Student";
-        document.getElementById('formStudentId').value = '';
-    }
+            generateBriefing(student) {
+                let statusText = "";
+                if (student.grade >= 85) statusText = "excelling academically";
+                else if (student.grade >= 70) statusText = "maintaining a satisfactory grade";
+                else statusText = "currently struggling with coursework";
 
-    document.getElementById('studentFormModal').style.display = 'block';
-}
+                let engagementText = student.aleksDays <= 3 ?
+                    "They have engaged with ALEKS recently." :
+                    `It has been ${student.aleksDays} days since their last ALEKS login.`;
 
-// Close Student Form Modal
-function closeStudentForm() {
-    document.getElementById('studentFormModal').style.display = 'none';
-}
+                let stressText = student.stress > 7 ? "Recent surveys show high stress." : "";
+                let confidenceText = student.confidence < 5 ? "Confidence is currently low." : "";
 
-// Save Student (add or edit)
-function saveStudent(event) {
-    event.preventDefault();
-    const id = document.getElementById('formStudentId').value;
-    const firstName = document.getElementById('formFirstName').value;
-    const lastName = document.getElementById('formLastName').value;
-    const grade = Number(document.getElementById('formGrade').value);
-    const aleksDays = Number(document.getElementById('formAleksDays').value);
-    const aleksTopics = Number(document.getElementById('formAleksTopics').value);
-    const thinkTankVisits = Number(document.getElementById('formThinkTankVisits').value);
-    const stress = Number(document.getElementById('formStress').value);
-    const confidence = Number(document.getElementById('formConfidence').value);
-    const wellness = Number(document.getElementById('formWellness').value);
+                let coachNoteText = "";
+                if (student.coachNotes && student.coachNotes.length) {
+                    let lastNote = student.coachNotes[0]; // Most recent (sorted desc)
+                    coachNoteText = `In the last meeting (${new Date(lastNote.date).toLocaleDateString()}), the coach noted: "${lastNote.summary}".`;
+                }
 
-    // Set status and emoji
-    const status = wellness >= 80 ? 'green' : wellness >= 60 ? 'yellow' : 'red';
-    const statusEmoji = status === 'green' ? '🟢' : status === 'yellow' ? '🟡' : '🔴';
-    const type = (wellness < 60 || grade < 70) ? 'struggling' : wellness > 85 ? 'excelling' : 'average';
-    const sentimentScore = Math.max(1, Math.min(10, (11 - stress + confidence) / 2));
+                let recommendation = "Recommendation: ";
+                if (student.status === "red") recommendation += "Prioritize outreach and offer extra support resources.";
+                else if (student.status === "yellow") recommendation += "Encourage continued engagement and monitor closely.";
+                else recommendation += "Maintain current strategies and reinforce positive behaviors.";
 
-    if (id) {
-        // Edit student
-        const idx = students.findIndex(s => s.id === id);
-        if (idx > -1) {
-            students[idx] = {
-                ...students[idx],
-                firstName,
-                lastName,
-                fullName: `${firstName} ${lastName}`,
-                grade,
-                aleksDays,
-                aleksTopics,
-                thinkTankVisits,
-                stress,
-                confidence,
-                wellness,
-                status,
-                statusEmoji,
-                type,
-                sentimentScore
-            };
-        }
-    } else {
-        // Add new student
-        const newId = `UA${1000 + students.length + 1}`;
-        students.push({
-            id: newId,
-            firstName,
-            lastName,
-            fullName: `${firstName} ${lastName}`,
-            grade,
-            aleksDays,
-            aleksTopics,
-            thinkTankVisits,
-            stress,
-            confidence,
-            wellness,
-            status,
-            statusEmoji,
-            type,
-            sentimentScore
+                return `
+                    <div style="background:#f8f9fa; border-left:4px solid #3498db; border-radius:8px; padding:12px 16px; margin-bottom:16px;">
+                        <strong>Briefing for Coach:</strong><br>
+                        ${student.fullName} is ${statusText} (grade: ${student.grade}%). ${engagementText}
+                        ${stressText} ${confidenceText}
+                        ${coachNoteText}
+                        <br><em>${recommendation}</em>
+                    </div>
+                `;
+            },
+
+            renderCoachNotes(notes) {
+                if (!notes || !notes.length) {
+                    return '<li style="color: #7f8c8d; font-style: italic;">No coach notes on record.</li>';
+                }
+
+                return notes.map((note, i) => `
+                    <li style="margin-bottom: 12px;">
+                        <div class="coach-note-summary" onclick="StudentProfile.toggleCoachNote(${i})">
+                            📝 <span>${new Date(note.date).toLocaleDateString('en-US', { 
+                                month: 'short', 
+                                day: 'numeric', 
+                                year: 'numeric'
+                            })} at ${new Date(note.date).toLocaleTimeString('en-US', {
+                                hour: 'numeric',
+                                minute: '2-digit',
+                                hour12: true
+                            })}</span>: ${note.summary}
+                            <span id="expandIcon${i}" style="color:#3498db; margin-left: 8px;">[-]</span>
+                        </div>
+                        <div class="coach-note-details" id="coachNoteDetails${i}">
+                            ${note.details}
+                        </div>
+                    </li>
+                `).join('');
+            },
+
+            toggleCoachNote(index) {
+                const details = document.getElementById(`coachNoteDetails${index}`);
+                const icon = document.getElementById(`expandIcon${index}`);
+                
+                if (details.style.display === 'none') {
+                    details.style.display = 'block';
+                    icon.textContent = '[-]';
+                } else {
+                    details.style.display = 'none';
+                    icon.textContent = '[+]';
+                }
+            },
+
+            createAttendanceChart(student) {
+                const ctx = document.getElementById('attendanceChart');
+                if (!ctx) return;
+
+                new Chart(ctx.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: student.attendanceData.dates,
+                        datasets: [{
+                            label: 'Attended',
+                            data: student.attendanceData.data,
+                            backgroundColor: student.attendanceData.data.map(val => val === 1 ? '#27ae60' : '#e74c3c'),
+                            borderRadius: 3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 1,
+                                ticks: {
+                                    callback: function(value) {
+                                        return value === 1 ? 'Present' : 'Absent';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            },
+
+            createAleksActivityChart(student) {
+                const ctx = document.getElementById('aleksActivityChart');
+                if (!ctx) return;
+
+                new Chart(ctx.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: student.aleksActivityData.dates,
+                        datasets: [{
+                            label: 'Minutes',
+                            data: student.aleksActivityData.data,
+                            borderColor: '#3498db',
+                            backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: { display: true, text: 'Minutes' }
+                            }
+                        }
+                    }
+                });
+            },
+
+            logOutreach(studentId) {
+                const student = DataManager.getStudentById(studentId);
+                if (!student) return;
+                
+                const contactType = prompt('Contact type (Email/Text/Phone Call/In-person Meeting):');
+                const notes = prompt('Notes about the contact:');
+                
+                if (contactType && notes) {
+                    // Add new note to the beginning of array (most recent first)
+                    student.coachNotes.unshift({
+                        date: new Date().toISOString(),
+                        summary: contactType,
+                        details: notes
+                    });
+                    
+                    alert(`Outreach logged for ${student.fullName}:\nType: ${contactType}\nNotes: ${notes}`);
+                    
+                    // Refresh the profile view
+                    this.show(studentId);
+                }
+            },
+
+            close() {
+                document.getElementById('studentProfileModal').style.display = 'none';
+            }
+        };
+
+        // ===== STUDENT FORM MANAGER =====
+        const StudentForm = {
+            open(studentId = null) {
+                const form = document.getElementById('studentForm');
+                const title = document.getElementById('studentFormTitle');
+                form.reset();
+
+                if (studentId) {
+                    const student = DataManager.getStudentById(studentId);
+                    if (!student) return;
+                    
+                    title.textContent = "Edit Student";
+                    document.getElementById('formStudentId').value = student.id;
+                    document.getElementById('formFirstName').value = student.firstName;
+                    document.getElementById('formLastName').value = student.lastName;
+                    document.getElementById('formGrade').value = student.grade;
+                    document.getElementById('formAleksDays').value = student.aleksDays;
+                    document.getElementById('formAleksTopics').value = student.aleksTopics;
+                    document.getElementById('formThinkTankVisits').value = student.thinkTankVisits;
+                    document.getElementById('formStress').value = student.stress;
+                    document.getElementById('formConfidence').value = student.confidence;
+                    document.getElementById('formWellness').value = student.wellness;
+                } else {
+                    title.textContent = "Add Student";
+                    document.getElementById('formStudentId').value = '';
+                }
+
+                document.getElementById('studentFormModal').style.display = 'block';
+            },
+
+            close() {
+                document.getElementById('studentFormModal').style.display = 'none';
+            },
+
+            save(event) {
+                event.preventDefault();
+                
+                const studentData = {
+                    firstName: document.getElementById('formFirstName').value,
+                    lastName: document.getElementById('formLastName').value,
+                    grade: Number(document.getElementById('formGrade').value),
+                    aleksDays: Number(document.getElementById('formAleksDays').value),
+                    aleksTopics: Number(document.getElementById('formAleksTopics').value),
+                    thinkTankVisits: Number(document.getElementById('formThinkTankVisits').value),
+                    stress: Number(document.getElementById('formStress').value),
+                    confidence: Number(document.getElementById('formConfidence').value),
+                    wellness: Number(document.getElementById('formWellness').value)
+                };
+
+                const id = document.getElementById('formStudentId').value;
+                
+                if (id) {
+                    DataManager.updateStudent(id, studentData);
+                } else {
+                    DataManager.addStudent(studentData);
+                }
+
+                this.close();
+                Dashboard.refresh();
+            }
+        };
+
+        // ===== TIMELINE MANAGER =====
+        const Timeline = {
+            events: [
+                { date: "2025-06-02", label: "Summer Session Starts", type: "registration" },
+                { date: "2025-06-06", label: "Last Day to Add/Drop", type: "registration" },
+                { date: "2025-06-09", label: "First Week Check-in", type: "outreach" },
+                { date: "2025-06-16", label: "Early Outreach Week", type: "outreach" },
+                { date: "2025-06-20", label: "Summer Solstice", type: "holiday" },
+                { date: "2025-06-23", label: "Grade Reports Due", type: "exam" },
+                { date: "2025-06-30", label: "Mid-Month Assessment", type: "exam" },
+                { date: "2025-07-04", label: "Independence Day", type: "holiday" },
+                { date: "2025-07-07", label: "Week 5 Progress Review", type: "outreach" },
+                { date: "2025-07-14", label: "Midterm Period", type: "exam" },
+                { date: "2025-07-18", label: "Midterm Grades Due", type: "exam" },
+                { date: "2025-07-21", label: "Mid-Summer Check-in", type: "outreach" },
+                { date: "2025-07-25", label: "Last Day to Withdraw", type: "registration" },
+                { date: "2025-07-28", label: "Week 8 Intensive Support", type: "outreach" },
+                { date: "2025-08-01", label: "Final Month Begins", type: "registration" },
+                { date: "2025-08-04", label: "Finals Week", type: "exam" },
+                { date: "2025-08-08", label: "Summer Session Ends", type: "exam" },
+                { date: "2025-08-11", label: "Grade Submission Deadline", type: "exam" }
+            ],
+            currentFilter: 'all',
+
+            init() {
+                this.setupScrolling();
+                this.render();
+            },
+
+            formatEventDate(dateStr) {
+                const date = new Date(dateStr);
+                const monthNames = ["January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"];
+                const day = date.getDate();
+                const suffix = this.getOrdinalSuffix(day);
+                return `${monthNames[date.getMonth()]} ${day}${suffix}, ${date.getFullYear()}`;
+            },
+
+            formatTodayDate() {
+                const today = new Date();
+                const monthNames = ["January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"];
+                const day = today.getDate();
+                const month = today.getMonth();
+                const year = today.getFullYear();
+                return `Today, ${month + 1}/${day}/${year}`;
+            },
+
+            getOrdinalSuffix(day) {
+                if (day > 3 && day < 21) return 'th';
+                switch (day % 10) {
+                    case 1: return 'st';
+                    case 2: return 'nd';
+                    case 3: return 'rd';
+                    default: return 'th';
+                }
+            },
+
+            filter(type, buttonElement) {
+                this.currentFilter = type;
+                this.render();
+                this.updateFilterButtons(buttonElement);
+            },
+
+            handleEventClick(eventData) {
+                const eventDetails = `
+                    📅 ${eventData.label}
+                    📆 ${this.formatEventDate(eventData.date)}
+                    🏷️ Type: ${eventData.type.charAt(0).toUpperCase() + eventData.type.slice(1)}
+                    
+                    Would you like to:
+                    • Add a reminder
+                    • Edit this event
+                    • Delete this event
+                `;
+                
+                if (confirm(eventDetails + "\n\nClick OK to edit, Cancel to close")) {
+                    this.editEvent(eventData);
+                }
+            },
+
+            editEvent(eventData) {
+                const newLabel = prompt('Edit event name:', eventData.label);
+                const newDate = prompt('Edit date (YYYY-MM-DD):', eventData.date);
+                
+                if (newLabel && newDate) {
+                    eventData.label = newLabel;
+                    eventData.date = newDate;
+                    this.render();
+                }
+            },
+
+            render() {
+                const container = document.getElementById('milestoneTimeline');
+                container.innerHTML = '';
+
+                // Calculate timeline dimensions
+                const semesterLength = (CONFIG.SEMESTER_END - CONFIG.SEMESTER_START) / (1000 * 60 * 60 * 24);
+                const weeks = semesterLength / 7;
+                const pxPerWeek = 120; // Increased for better spacing
+                container.style.width = Math.max(weeks * pxPerWeek, 1200) + 'px';
+
+                // Add month background shading with borders
+                this.addMonthShading(container);
+
+                // Add main track
+                const track = document.createElement('div');
+                track.className = 'timeline-track';
+                container.appendChild(track);
+
+                // Add current date indicator with label
+                const currentPercent = this.getTimelinePercent(CONFIG.CURRENT_DATE) * 100;
+                if (currentPercent >= 0 && currentPercent <= 100) {
+                    const currentLine = document.createElement('div');
+                    currentLine.className = 'timeline-current-line';
+                    currentLine.style.left = currentPercent + '%';
+                    container.appendChild(currentLine);
+
+                    // Add today marker label
+                    const todayMarker = document.createElement('div');
+                    todayMarker.className = 'timeline-today-marker';
+                    todayMarker.style.left = currentPercent + '%';
+                    todayMarker.textContent = this.formatTodayDate();
+                    container.appendChild(todayMarker);
+                }
+
+                // Add event dots
+                this.events.forEach(eventData => {
+                    if (this.currentFilter !== 'all' && this.currentFilter !== eventData.type) return;
+                    
+                    const percent = this.getTimelinePercent(new Date(eventData.date)) * 100;
+                    if (percent < 0 || percent > 100) return; // Skip events outside timeline
+                    
+                    const dot = document.createElement('div');
+                    dot.className = 'timeline-dot';
+                    dot.style.left = percent + '%';
+                    dot.textContent = this.getEventEmoji(eventData.type);
+                    dot.style.cursor = 'pointer';
+                    
+                    // Add click handler - capture eventData in closure
+                    dot.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        this.handleEventClick(eventData);
+                    });
+                    
+                    const popover = document.createElement('div');
+                    popover.className = 'popover';
+                    popover.textContent = `${eventData.label} (${this.formatEventDate(eventData.date)})`;
+                    dot.appendChild(popover);
+                    
+                    container.appendChild(dot);
+                });
+            },
+
+            addMonthShading(container) {
+                const months = [
+                    { name: 'June', start: new Date('2025-06-01'), color: 'rgba(227, 242, 253, 0.5)' },
+                    { name: 'July', start: new Date('2025-07-01'), color: 'rgba(243, 229, 245, 0.5)' }, 
+                    { name: 'August', start: new Date('2025-08-01'), color: 'rgba(232, 245, 232, 0.5)' }
+                ];
+
+                months.forEach((month, index) => {
+                    const monthStart = this.getTimelinePercent(month.start) * 100;
+                    const nextMonth = new Date(month.start);
+                    nextMonth.setMonth(nextMonth.getMonth() + 1);
+                    const monthEnd = this.getTimelinePercent(nextMonth) * 100;
+                    
+                    if (monthStart < 100 && monthEnd > 0) {
+                        const shade = document.createElement('div');
+                        shade.className = 'timeline-month-shade';
+                        shade.style.cssText = `
+                            left: ${Math.max(0, monthStart)}%;
+                            width: ${Math.min(100, monthEnd) - Math.max(0, monthStart)}%;
+                            background-color: ${month.color};
+                        `;
+                        
+                        // Add month label
+                        const label = document.createElement('div');
+                        label.style.cssText = `
+                            position: absolute;
+                            top: 5px;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            font-size: 0.8em;
+                            color: #666;
+                            font-weight: bold;
+                            pointer-events: none;
+                        `;
+                        label.textContent = month.name;
+                        shade.appendChild(label);
+                        
+                        container.appendChild(shade);
+                    }
+                });
+            },
+
+            getTimelinePercent(date) {
+                const timelineLength = (CONFIG.SEMESTER_END - CONFIG.SEMESTER_START) / (1000 * 60 * 60 * 24);
+                const curr = (new Date(date) - CONFIG.SEMESTER_START) / (1000 * 60 * 60 * 24);
+                return Math.max(0, Math.min(1, curr / timelineLength));
+            },
+
+            getEventEmoji(type) {
+                const emojis = {
+                    exam: "📝",
+                    holiday: "🏖️",
+                    outreach: "⭐",
+                    registration: "🎓",
+                    custom: "🔹"
+                };
+                return emojis[type] || "📅";
+            },
+
+            addCustomEvent() {
+                const label = prompt('Event name?');
+                if (!label) return;
+                
+                const date = prompt('Date (YYYY-MM-DD)?');
+                if (!date) return;
+                
+                // Validate date format
+                const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+                if (!dateRegex.test(date)) {
+                    alert('Please enter date in YYYY-MM-DD format');
+                    return;
+                }
+                
+                const type = prompt('Event type (registration/exam/holiday/outreach/custom)?') || 'custom';
+                
+                this.events.push({ date, label, type });
+                this.events.sort((a, b) => new Date(a.date) - new Date(b.date)); // Keep chronological order
+                this.render();
+                
+                alert(`Event "${label}" added successfully!`);
+            },
+
+            updateFilterButtons(activeButton) {
+                document.querySelectorAll('.timeline-controls .filter-button').forEach(btn => {
+                    if (btn !== activeButton && !btn.textContent.includes('Add Event')) {
+                        btn.classList.remove('filter-active');
+                        btn.classList.add('filter-inactive');
+                    }
+                });
+                activeButton.classList.remove('filter-inactive');
+                activeButton.classList.add('filter-active');
+            },
+
+            setupScrolling() {
+                const wrapper = document.getElementById('milestoneTimelineWrapper');
+                let isDown = false, startX, scrollLeft;
+
+                // Mouse drag scrolling
+                wrapper.addEventListener('mousedown', e => {
+                    isDown = true;
+                    wrapper.style.cursor = 'grabbing';
+                    startX = e.pageX - wrapper.offsetLeft;
+                    scrollLeft = wrapper.scrollLeft;
+                    e.preventDefault();
+                });
+
+                document.addEventListener('mouseup', () => {
+                    isDown = false;
+                    wrapper.style.cursor = 'grab';
+                });
+
+                wrapper.addEventListener('mouseleave', () => {
+                    isDown = false;
+                    wrapper.style.cursor = 'grab';
+                });
+
+                wrapper.addEventListener('mousemove', e => {
+                    if (!isDown) return;
+                    e.preventDefault();
+                    const x = e.pageX - wrapper.offsetLeft;
+                    const walk = (x - startX) * 2; // Increased sensitivity
+                    wrapper.scrollLeft = scrollLeft - walk;
+                });
+
+                // Wheel scrolling (both horizontal and shift+wheel)
+                wrapper.addEventListener('wheel', e => {
+                    if (e.shiftKey) {
+                        // Shift + wheel for horizontal scroll
+                        wrapper.scrollLeft += e.deltaY;
+                        e.preventDefault();
+                    } else {
+                        // Regular wheel for horizontal scroll in timeline
+                        wrapper.scrollLeft += e.deltaY;
+                        e.preventDefault();
+                    }
+                }, { passive: false });
+
+                // Touch support for mobile
+                let touchStartX;
+                wrapper.addEventListener('touchstart', e => {
+                    touchStartX = e.touches[0].pageX - wrapper.offsetLeft;
+                    scrollLeft = wrapper.scrollLeft;
+                });
+
+                wrapper.addEventListener('touchmove', e => {
+                    if (!touchStartX) return;
+                    e.preventDefault();
+                    const x = e.touches[0].pageX - wrapper.offsetLeft;
+                    const walk = (x - touchStartX) * 2;
+                    wrapper.scrollLeft = scrollLeft - walk;
+                }, { passive: false });
+
+                wrapper.addEventListener('touchend', () => {
+                    touchStartX = null;
+                });
+
+                // Set initial cursor
+                wrapper.style.cursor = 'grab';
+            }
+        };
+
+        // ===== ADVANCED FILTERS MANAGER =====
+        const AdvancedFilters = {
+            isVisible: false,
+            activeFilters: {},
+
+            toggle() {
+                const panel = document.getElementById('advancedFilters');
+                this.isVisible = !this.isVisible;
+                panel.style.display = this.isVisible ? 'block' : 'none';
+                
+                if (!this.isVisible) {
+                    this.clearAll();
+                }
+            },
+
+            applyFilters() {
+                const filters = {
+                    name: document.getElementById('nameFilter').value.toLowerCase(),
+                    minGrade: Number(document.getElementById('minGrade').value) || 0,
+                    maxGrade: Number(document.getElementById('maxGrade').value) || 100,
+                    aleksDays: document.getElementById('aleksDaysFilter').value,
+                    visits: document.getElementById('visitsFilter').value,
+                    stress: document.getElementById('stressFilter').value
+                };
+
+                this.activeFilters = filters;
+                StudentManager.applyAdvancedFilters(filters);
+                this.updateResultCount();
+            },
+
+            clearAll() {
+                document.getElementById('nameFilter').value = '';
+                document.getElementById('minGrade').value = '';
+                document.getElementById('maxGrade').value = '';
+                document.getElementById('aleksDaysFilter').value = '';
+                document.getElementById('visitsFilter').value = '';
+                document.getElementById('stressFilter').value = '';
+                
+                this.activeFilters = {};
+                StudentManager.clearAdvancedFilters();
+                this.updateResultCount();
+            },
+
+            updateResultCount() {
+                const count = StudentManager.getFilteredCount();
+                const resultElement = document.getElementById('filterResultCount');
+                if (resultElement) {
+                    resultElement.textContent = `Showing ${count} of ${DataManager.students.length} students`;
+                }
+            },
+
+            matchesFilters(student, filters) {
+                if (filters.name && !student.fullName.toLowerCase().includes(filters.name)) {
+                    return false;
+                }
+                
+                if (student.grade < filters.minGrade || student.grade > filters.maxGrade) {
+                    return false;
+                }
+                
+                if (filters.aleksDays) {
+                    const days = student.aleksDays;
+                    if (filters.aleksDays === '0-3' && days > 3) return false;
+                    if (filters.aleksDays === '4-7' && (days < 4 || days > 7)) return false;
+                    if (filters.aleksDays === '8+' && days < 8) return false;
+                }
+                
+                if (filters.visits) {
+                    const visits = student.thinkTankVisits;
+                    if (filters.visits === '0' && visits !== 0) return false;
+                    if (filters.visits === '1-2' && (visits < 1 || visits > 2)) return false;
+                    if (filters.visits === '3+' && visits < 3) return false;
+                }
+                
+                if (filters.stress) {
+                    const stress = student.stress;
+                    if (filters.stress === 'low' && stress > 4) return false;
+                    if (filters.stress === 'medium' && (stress < 5 || stress > 7)) return false;
+                    if (filters.stress === 'high' && stress < 8) return false;
+                }
+                
+                return true;
+            }
+        };
+
+        // ===== MAIN DASHBOARD CONTROLLER =====
+        const Dashboard = {
+            init() {
+                try {
+                    DataManager.generateStudents();
+                    this.refresh();
+                    Timeline.init();
+                    StudentManager.updateSortButtons(); // Initialize sort button states
+                    document.getElementById('lastUpdated').textContent = new Date().toLocaleString();
+                    console.log('Dashboard initialized successfully');
+                } catch (error) {
+                    console.error('Dashboard initialization failed:', error);
+                    this.showError('Dashboard failed to load. Please refresh the page.');
+                }
+            },
+
+            refresh() {
+                StatsManager.update();
+                ChartManager.createAll();
+                StudentManager.display();
+            },
+
+            showError(message) {
+                // Simple error display - could be enhanced with a proper modal
+                alert(`Error: ${message}`);
+            }
+        };
+
+        // ===== INITIALIZE DASHBOARD =====
+        document.addEventListener('DOMContentLoaded', () => {
+            Dashboard.init();
         });
-    }
 
-    closeStudentForm();
-    updateStats();
-    createCharts();
-    displayStudents(currentFilter);
-}
-
-// (Removed old timelineEvents, outreachBlocks, semesterStart, semesterEnd, and old getTimelinePercent)
-
-function initializeDashboard() {
-    updateStats();
-    createCharts();
-    displayStudents();
-    document.getElementById('lastUpdated').textContent = new Date().toLocaleString();
-}
-const milestoneTimelineEvents = [
-  { date: "2024-08-19", label: "Classes Start", type: "registration" },
-  { date: "2024-08-23", label: "Last Day to Add/Drop", type: "registration" },
-  { date: "2024-09-02", label: "Labor Day", type: "holiday" },
-  { date: "2024-09-16", label: "Golden Outreach", type: "outreach", outreachBand: { end: "2024-09-20" }},
-  { date: "2024-10-07", label: "Midterms Begin", type: "exam" },
-  { date: "2024-10-14", label: "Fall Break", type: "holiday" },
-  { date: "2024-11-04", label: "Pre-Reg/Advising", type: "registration" },
-  { date: "2024-11-28", label: "Thanksgiving", type: "holiday" },
-  { date: "2024-12-09", label: "Finals Week", type: "exam" },
-  { date: "2024-12-13", label: "Semester Ends", type: "exam" }
-];
-const milestoneOutreachBands = [
-  { start: "2024-09-16", end: "2024-09-20" },
-  { start: "2024-10-07", end: "2024-10-11" },
-  { start: "2024-11-04", end: "2024-11-08" }
-];
-function getTimelinePercent(date) {
-  const timelineStart = new Date("2024-08-19");
-  const timelineEnd = new Date("2024-12-13");
-  const timelineLength = (timelineEnd - timelineStart) / (1000 * 60 * 60 * 24);
-  const curr = (new Date(date) - timelineStart) / (1000 * 60 * 60 * 24);
-  return Math.max(0, Math.min(1, curr / timelineLength));
-}
-
-function renderMilestoneTimeline(filter = 'all') {
-  const container = document.getElementById('milestoneTimeline');
-  container.innerHTML = '';
-
-  // dynamically size timeline to semester length
-  const semesterStart = new Date("2024-08-19");
-  const semesterEnd = new Date("2024-12-13");
-  const days = (semesterEnd - semesterStart) / (1000 * 60 * 60 * 24);
-  const weeks = days / 7;
-  const pxPerWeek = 100;
-  container.style.width = Math.max(weeks * pxPerWeek, 900) + 'px';
-
-  // Add the solid background track first (always present, always visible)
-  const track = document.createElement('div');
-  track.className = 'timeline-track';
-  container.appendChild(track);
-
-  // Highlight current week position
-  const totalMs = semesterEnd - semesterStart;
-  const now = new Date();
-  const currPerc = ((now - semesterStart) / totalMs) * 100;
-  const currentLine = document.createElement('div');
-  currentLine.className = 'timeline-tick current';
-  currentLine.style.left = currPerc + '%';
-  container.appendChild(currentLine);
-
-  // Add outreach bands (appear above the track)
-  milestoneOutreachBands.forEach(band => {
-    if (filter !== 'all' && filter !== 'outreach') return;
-    const left = getTimelinePercent(band.start) * 100;
-    const width = (getTimelinePercent(band.end) - getTimelinePercent(band.start)) * 100;
-    const bandDiv = document.createElement('div');
-    bandDiv.className = 'timeline-band';
-    bandDiv.style.left = left + '%';
-    bandDiv.style.width = width + '%';
-    container.appendChild(bandDiv);
-  });
-
-  // Add event dots (centered on the bar)
-  milestoneTimelineEvents.forEach(event => {
-    if (filter !== 'all' && filter !== event.type) return;
-    const percent = getTimelinePercent(event.date) * 100;
-    const dot = document.createElement('div');
-    dot.className = 'timeline-dot ' + event.type;
-    dot.style.left = percent + '%';
-    dot.onclick = () => alert(`${event.label}\n${event.date}`);
-    dot.textContent = event.type === "exam" ? "📝" : event.type === "holiday" ? "🏖️" : event.type === "outreach" ? "⭐" : event.type === "registration" ? "🎓" : "🔹";
-    // Create popover
-    const pop = document.createElement('div');
-    pop.className = 'popover';
-    pop.textContent = `${event.label} (${event.date})`;
-    dot.appendChild(pop);
-    container.appendChild(dot);
-  });
-}
-let currentTimelineFilter = 'all';
-function filterTimelineEvents(type) {
-  // If called from old select (should not happen), fallback
-  if (typeof type !== 'string') {
-    type = currentTimelineFilter || 'all';
-  }
-  currentTimelineFilter = type;
-  renderMilestoneTimeline(type);
-}
-// Add custom event (simple demo)
-function addCustomTimelineEvent() {
-  const label = prompt('Event name?');
-  const date = prompt('Date (YYYY-MM-DD)?');
-  if (label && date) {
-    milestoneTimelineEvents.push({ date, label, type: 'custom' });
-    renderMilestoneTimeline(currentTimelineFilter);
-  }
-}
-
-// Drag and wheel scroll on timeline wrapper
-(function() {
-  const wrapper = document.getElementById('milestoneTimelineWrapper');
-  let isDown = false, startX, scrollLeft;
-  wrapper.addEventListener('mousedown', e => {
-    isDown = true;
-    wrapper.classList.add('dragging');
-    startX = e.pageX - wrapper.offsetLeft;
-    scrollLeft = wrapper.scrollLeft;
-  });
-  ['mouseleave', 'mouseup'].forEach(evt =>
-    wrapper.addEventListener(evt, () => { isDown = false; wrapper.classList.remove('dragging'); })
-  );
-  wrapper.addEventListener('mousemove', e => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - wrapper.offsetLeft;
-    const walk = (x - startX) * 1.5;
-    wrapper.scrollLeft = scrollLeft - walk;
-  });
-  wrapper.addEventListener('wheel', e => {
-    wrapper.scrollLeft += e.deltaY;
-    e.preventDefault();
-  }, { passive: false });
-  // Touch events
-  wrapper.addEventListener('touchstart', e => {
-    startX = e.touches[0].pageX - wrapper.offsetLeft;
-    scrollLeft = wrapper.scrollLeft;
-  });
-  wrapper.addEventListener('touchmove', e => {
-    e.preventDefault();
-    const x = e.touches[0].pageX - wrapper.offsetLeft;
-    const walk = (x - startX) * 1.5;
-    wrapper.scrollLeft = scrollLeft - walk;
-  }, { passive: false });
-})();
-
-function updateTimelineControls(activeBtn) {
-  document.querySelectorAll('.timeline-controls .filter-button').forEach(btn => {
-    btn.classList.remove('filter-active');
-    btn.classList.add('filter-inactive');
-  });
-  activeBtn.classList.remove('filter-inactive');
-  activeBtn.classList.add('filter-active');
-}
-
-// Only call renderMilestoneTimeline ONCE on DOMContentLoaded, after dashboard is set up
-document.addEventListener('DOMContentLoaded', () => {
-  initializeDashboard();
-  renderMilestoneTimeline(currentTimelineFilter);
-});
+        // ===== GLOBAL FUNCTIONS =====
+        // Make objects globally accessible for onclick handlers
+        window.StudentProfile = StudentProfile;
+        window.Timeline = Timeline;
+        window.AdvancedFilters = AdvancedFilters;
+        window.StudentManager = StudentManager;
+        window.StudentForm = StudentForm;
     </script>
 </body>
 </html>
